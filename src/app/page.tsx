@@ -4,6 +4,7 @@ import BuildersSection from '@/components/BuildersSection';
 import ProjectsGallery from '@/components/ProjectsGallery';
 import ProcessSection from '@/components/ProcessSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
+import TrustedPartners from '@/components/TrustedPartners';
 import FloatingContactCard from '@/components/FloatingContactCard';
 import { Metadata } from 'next';
 
@@ -22,6 +23,7 @@ export default function Home() {
       <ProjectsGallery />
       <ProcessSection />
       <TestimonialsSection />
+      <TrustedPartners />
     </div>
   );
 }

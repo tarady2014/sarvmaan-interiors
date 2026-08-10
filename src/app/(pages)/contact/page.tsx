@@ -11,12 +11,66 @@ export default function Contact() {
     name: '',
     email: '',
     phone: '',
-    serviceType: '',
+    location: '',
+    serviceCategory: '',
+    service: '',
+    bhkType: '',
+    commercialType: '',
+    carpetArea: '',
+    budgetRange: '',
+    timeline: '',
     message: '',
   });
 
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  // Service categories and options matching Services Page
+  const serviceOptions = {
+    'Core Solutions': [
+      'Modular Kitchen Design',
+      'Full Home Interiors',
+      'Bedroom Interior',
+      'Bathroom Interior',
+    ],
+    'Design Services': [
+      '2D & 3D Interior Design',
+      'Material & Color Consultation',
+      'Lighting Design',
+    ],
+    'Execution Services': [
+      'Carpentry & Woodwork',
+      'False Ceiling & Integrated Lighting',
+      'Painting & Wall Finishes',
+      'Turnkey Execution & Site Supervision',
+    ],
+    'Specialized': [
+      'Modular Storage Solutions',
+      'Commercial Interiors',
+      'Renovation & Makeover Services',
+      'Smart Home & Premium Add-ons',
+    ],
+  };
+
+  const bhkOptions = ['1 BHK', '2 BHK', '3 BHK', '4 BHK', '4+ BHK'];
+  const commercialOptions = ['Office', 'Retail', 'Café/Restaurant', 'Healthcare', 'Other'];
+  const budgetOptions = [
+    '₹1-3 Lakhs',
+    '₹3-5 Lakhs',
+    '₹5-10 Lakhs',
+    '₹10-20 Lakhs',
+    '₹20+ Lakhs',
+  ];
+  const timelineOptions = ['Immediate', '1-3 months', '3-6 months', '6+ months'];
+
+  const isHomeInteriorService = () => {
+    const homeServices = ['Full Home Interiors', 'Bedroom Interior', 'Bathroom Interior'];
+    return homeServices.includes(formData.service);
+  };
+
+  const isCommercialService = () => {
+    return formData.service === 'Commercial Interiors';
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -36,7 +90,20 @@ export default function Contact() {
 
       if (response.ok) {
         setSubmitted(true);
-        setFormData({ name: '', email: '', phone: '', serviceType: '', message: '' });
+        setFormData({ 
+          name: '', 
+          email: '', 
+          phone: '', 
+          location: '',
+          serviceCategory: '',
+          service: '',
+          bhkType: '',
+          commercialType: '',
+          carpetArea: '',
+          budgetRange: '',
+          timeline: '',
+          message: '' 
+        });
         setTimeout(() => setSubmitted(false), 5000);
       }
     } catch (error) {
@@ -48,9 +115,9 @@ export default function Contact() {
 
   const contactInfo = [
     { icon: FiPhone, title: 'Phone', value: '+91 74477 22255', link: 'tel:+917447722255' },
-    { icon: FiMail, title: 'Email', value: 'hello@SarvMaan.com', link: 'mailto:hello@SarvMaan.com' },
-    { icon: FiMapPin, title: 'Location', value: 'Bhavdhan, Pune', link: 'https://maps.google.com' },
-    { icon: FiClock, title: 'Hours', value: 'Mon - Sat: 10 AM - 6 PM', link: '#' },
+    { icon: FiMail, title: 'Email', value: 'contact@SarvMaan.com', link: 'mailto:contact@SarvMaan.com' },
+    { icon: FiMapPin, title: 'Location', value: 'Bavdhan, Pune', link: 'https://maps.google.com' },
+    { icon: FiClock, title: 'Hours', value: 'Mon - Sun: 08 AM - 08 PM', link: '#' },
   ];
 
   return (
@@ -58,7 +125,7 @@ export default function Contact() {
       <HeroImage 
         title="Get in Touch"
         subtitle="Have a project in mind? Let's discuss how we can help"
-        imageUrl="/images/hero-contact.webp"
+        imageUrl="/images/hero-about.webp"
         imageAlt="Contact Sarvmaan Home Superhero"
       />
 
@@ -100,7 +167,8 @@ export default function Contact() {
               viewport={{ once: true }}
               className="bg-white p-4 md:p-8 rounded-lg shadow-base"
             >
-              <h2 className="text-xl md:text-2xl font-bold text-primary mb-4 md:mb-6">Send us a Message</h2>
+              <h2 className="text-xl md:text-2xl font-bold text-primary mb-1 md:mb-2">Request Free Consultation</h2>
+              <p className="text-xs md:text-sm text-gray-600 mb-4 md:mb-6">Tell us about your project and get a personalized solution</p>
 
               {submitted && (
                 <motion.div
@@ -109,99 +177,249 @@ export default function Contact() {
                   className="mb-4 p-4 bg-green-50 border border-green-200 rounded-lg"
                 >
                   <p className="text-green-700 text-sm md:text-base font-medium">
-                    Thank you! We'll get back to you soon.
+                    Thank you! We'll get back to you within 24 hours.
                   </p>
                 </motion.div>
               )}
 
               <form onSubmit={handleSubmit} className="space-y-3 md:space-y-4">
-                <div>
-                  <label className="block text-xs md:text-sm font-semibold text-foreground/70 mb-1 md:mb-2">
-                    Full Name *
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary text-sm"
-                    placeholder="Your name"
-                  />
+                {/* Name & Phone */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+                  <div>
+                    <label className="block text-xs md:text-sm font-semibold text-foreground/70 mb-1 md:mb-2">
+                      Full Name *
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary text-sm"
+                      placeholder="Your name"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs md:text-sm font-semibold text-foreground/70 mb-1 md:mb-2">
+                      Phone *
+                    </label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary text-sm"
+                      placeholder="+91 XXXXX XXXXX"
+                    />
+                  </div>
                 </div>
 
-                <div>
-                  <label className="block text-xs md:text-sm font-semibold text-foreground/70 mb-1 md:mb-2">
-                    Email *
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary text-sm"
-                    placeholder="your@email.com"
-                  />
+                {/* Email & Location */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+                  <div>
+                    <label className="block text-xs md:text-sm font-semibold text-foreground/70 mb-1 md:mb-2">
+                      Email *
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary text-sm"
+                      placeholder="your@email.com"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs md:text-sm font-semibold text-foreground/70 mb-1 md:mb-2">
+                      City / Location *
+                    </label>
+                    <input
+                      type="text"
+                      name="location"
+                      value={formData.location}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary text-sm"
+                      placeholder="Pune, Bavdhan..."
+                    />
+                  </div>
                 </div>
 
+                {/* Service Category */}
                 <div>
                   <label className="block text-xs md:text-sm font-semibold text-foreground/70 mb-1 md:mb-2">
-                    Phone *
-                  </label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary text-sm"
-                    placeholder="+91 XXXXX XXXXX"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs md:text-sm font-semibold text-foreground/70 mb-1 md:mb-2">
-                    Service Type *
+                    Service Category *
                   </label>
                   <select
-                    name="serviceType"
-                    value={formData.serviceType}
+                    name="serviceCategory"
+                    value={formData.serviceCategory}
                     onChange={handleChange}
                     required
                     className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary text-sm"
                   >
-                    <option value="">Select a service</option>
-                    <option value="kitchen">Modular Kitchen</option>
-                    <option value="wardrobe">Wardrobe</option>
-                    <option value="living">Living Room</option>
-                    <option value="bedroom">Bedroom</option>
-                    <option value="commercial">Commercial</option>
-                    <option value="renovation">Full Renovation</option>
+                    <option value="">Select a category</option>
+                    <option value="Core Solutions">Core Solutions</option>
+                    <option value="Design Services">Design Services</option>
+                    <option value="Execution Services">Execution Services</option>
+                    <option value="Specialized">Specialized Services</option>
                   </select>
                 </div>
 
+                {/* Specific Service */}
+                {formData.serviceCategory && (
+                  <div>
+                    <label className="block text-xs md:text-sm font-semibold text-foreground/70 mb-1 md:mb-2">
+                      Select Service *
+                    </label>
+                    <select
+                      name="service"
+                      value={formData.service}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary text-sm"
+                    >
+                      <option value="">Choose a service</option>
+                      {serviceOptions[formData.serviceCategory as keyof typeof serviceOptions]?.map((svc) => (
+                        <option key={svc} value={svc}>
+                          {svc}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+
+                {/* Conditional Fields - Home Interiors */}
+                {isHomeInteriorService() && (
+                  <div>
+                    <label className="block text-xs md:text-sm font-semibold text-foreground/70 mb-1 md:mb-2">
+                      Property Type *
+                    </label>
+                    <select
+                      name="bhkType"
+                      value={formData.bhkType}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary text-sm"
+                    >
+                      <option value="">Select property type</option>
+                      {bhkOptions.map((bhk) => (
+                        <option key={bhk} value={bhk}>
+                          {bhk}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+
+                {/* Conditional Fields - Commercial */}
+                {isCommercialService() && (
+                  <div>
+                    <label className="block text-xs md:text-sm font-semibold text-foreground/70 mb-1 md:mb-2">
+                      Commercial Type *
+                    </label>
+                    <select
+                      name="commercialType"
+                      value={formData.commercialType}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary text-sm"
+                    >
+                      <option value="">Select type</option>
+                      {commercialOptions.map((type) => (
+                        <option key={type} value={type}>
+                          {type}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+
+                {/* Carpet Area */}
+                {formData.service && (
+                  <div>
+                    <label className="block text-xs md:text-sm font-semibold text-foreground/70 mb-1 md:mb-2">
+                      Carpet Area (sq ft) *
+                    </label>
+                    <input
+                      type="number"
+                      name="carpetArea"
+                      value={formData.carpetArea}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary text-sm"
+                      placeholder="e.g., 1500"
+                    />
+                  </div>
+                )}
+
+                {/* Budget & Timeline */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+                  <div>
+                    <label className="block text-xs md:text-sm font-semibold text-foreground/70 mb-1 md:mb-2">
+                      Budget Range *
+                    </label>
+                    <select
+                      name="budgetRange"
+                      value={formData.budgetRange}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary text-sm"
+                    >
+                      <option value="">Select budget</option>
+                      {budgetOptions.map((budget) => (
+                        <option key={budget} value={budget}>
+                          {budget}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-xs md:text-sm font-semibold text-foreground/70 mb-1 md:mb-2">
+                      Timeline *
+                    </label>
+                    <select
+                      name="timeline"
+                      value={formData.timeline}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary text-sm"
+                    >
+                      <option value="">Select timeline</option>
+                      {timelineOptions.map((time) => (
+                        <option key={time} value={time}>
+                          {time}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                {/* Message */}
                 <div>
                   <label className="block text-xs md:text-sm font-semibold text-foreground/70 mb-1 md:mb-2">
-                    Message
+                    Additional Details
                   </label>
                   <textarea
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
-                    rows={4}
+                    rows={3}
                     className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary text-sm"
-                    placeholder="Tell us about your project..."
+                    placeholder="Any specific requirements or ideas for your project..."
                   />
                 </div>
 
+                {/* Submit Button */}
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-secondary text-white py-3 md:py-4 rounded-lg font-semibold hover:bg-secondary/90 transition-colors disabled:opacity-50 text-sm md:text-base flex items-center justify-center gap-2"
+                  style={{ backgroundColor: '#d4af37', color: '#ffffff' }}
+                  className="w-full py-3 md:py-4 rounded-lg font-semibold hover:opacity-90 transition-opacity disabled:opacity-50 text-sm md:text-base flex items-center justify-center gap-2"
                 >
                   <FiSend size={18} />
-                  {loading ? 'Sending...' : 'Send Message'}
+                  {loading ? 'Sending...' : 'Request Free Consultation'}
                 </button>
               </form>
             </motion.div>
@@ -237,11 +455,11 @@ export default function Contact() {
                     <span className="text-sm md:text-base font-medium text-green-700">Chat on WhatsApp</span>
                   </a>
                   <a
-                    href="mailto:hello@sarvmaan.com"
+                    href="mailto:contact@sarvmaan.com"
                     className="flex items-center gap-3 p-3 bg-light rounded-lg hover:bg-secondary/10 transition-colors"
                   >
                     <FiMail className="text-secondary text-xl flex-shrink-0" />
-                    <span className="text-sm md:text-base font-medium text-foreground">hello@sarvmaan.com</span>
+                    <span className="text-sm md:text-base font-medium text-foreground">contact@sarvmaan.com</span>
                   </a>
                 </div>
               </div>
@@ -250,12 +468,8 @@ export default function Contact() {
                 <h3 className="text-lg md:text-xl font-bold text-primary mb-3 md:mb-4">Business Hours</h3>
                 <div className="space-y-2 md:space-y-3 text-sm md:text-base">
                   <div className="flex justify-between text-foreground/80">
-                    <span>Monday - Saturday:</span>
-                    <span className="font-semibold">10 AM - 6 PM</span>
-                  </div>
-                  <div className="flex justify-between text-foreground/80">
-                    <span>Sunday:</span>
-                    <span className="font-semibold">Closed</span>
+                    <span>Monday - Sunday:</span>
+                    <span className="font-semibold">08 AM - 08 PM</span>
                   </div>
                   <p className="text-xs md:text-sm text-foreground/60 mt-3 pt-3 border-t">
                     Response time: Within 24 hours

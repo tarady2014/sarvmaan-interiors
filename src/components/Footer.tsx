@@ -10,7 +10,7 @@ export default function Footer() {
   return (
     <footer className="bg-[#1a1410] text-white">
       <div className="max-w-7xl mx-auto px-4 py-8 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-6 md:mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 md:gap-8 mb-6 md:mb-12">
           {/* Brand */}
           <div>
             <h3 className="text-lg md:text-2xl font-bold mb-3 md:mb-4 text-secondary">
@@ -69,35 +69,89 @@ export default function Footer() {
           </div>
 
           {/* Services */}
-          <div>
+          <div className="lg:col-span-2">
             <h4 className="text-sm md:text-lg font-semibold mb-3 md:mb-6">Services</h4>
-            <ul className="space-y-2 md:space-y-3">
-              <li>
-                <Link href="/services" className="hover:text-secondary transition text-xs md:text-sm">
-                  Modular Kitchen Design
-                </Link>
-              </li>
-              <li>
-                <Link href="/services" className="hover:text-secondary transition text-xs md:text-sm">
-                  Full Home Interiors
-                </Link>
-              </li>
-              <li>
-                <Link href="/services" className="hover:text-secondary transition text-xs md:text-sm">
-                  2D & 3D Interior Design
-                </Link>
-              </li>
-              <li>
-                <Link href="/services" className="hover:text-secondary transition text-xs md:text-sm">
-                  False Ceiling & Lighting
-                </Link>
-              </li>
-              <li>
-                <Link href="/services" className="hover:text-secondary transition text-xs md:text-sm">
-                  Wall Finishes & Painting
-                </Link>
-              </li>
-            </ul>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 md:gap-y-2">
+              <ul className="space-y-1.5 md:space-y-2">
+                <li>
+                  <Link href="/services" className="hover:text-secondary transition text-xs md:text-sm">
+                    Modular Kitchen Design
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services" className="hover:text-secondary transition text-xs md:text-sm">
+                    Full Home Interiors
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services" className="hover:text-secondary transition text-xs md:text-sm">
+                    Bedroom Interior
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services" className="hover:text-secondary transition text-xs md:text-sm">
+                    Bathroom Interior
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services" className="hover:text-secondary transition text-xs md:text-sm">
+                    2D & 3D Design
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services" className="hover:text-secondary transition text-xs md:text-sm">
+                    Material Consultation
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services" className="hover:text-secondary transition text-xs md:text-sm">
+                    Lighting Design
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services" className="hover:text-secondary transition text-xs md:text-sm">
+                    Carpentry & Woodwork
+                  </Link>
+                </li>
+              </ul>
+              <ul className="space-y-1.5 md:space-y-2">
+                <li>
+                  <Link href="/services" className="hover:text-secondary transition text-xs md:text-sm">
+                    False Ceiling & Lighting
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services" className="hover:text-secondary transition text-xs md:text-sm">
+                    Painting & Wall Finishes
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services" className="hover:text-secondary transition text-xs md:text-sm">
+                    Turnkey Execution
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services" className="hover:text-secondary transition text-xs md:text-sm">
+                    Storage Solutions
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services" className="hover:text-secondary transition text-xs md:text-sm">
+                    Commercial Interiors
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services" className="hover:text-secondary transition text-xs md:text-sm">
+                    Renovation Services
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services" className="hover:text-secondary transition text-xs md:text-sm">
+                    Smart Home Solutions
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
 
           {/* Contact */}
@@ -108,20 +162,20 @@ export default function Footer() {
                 <FiPhone className="text-secondary mt-0.5 flex-shrink-0" size={16} />
                 <div>
                   <p className="font-medium text-xs md:text-sm">+91 74477 22255</p>
-                  <p className="text-gray-400 text-xs">Mon–Sat, 9am – 7pm</p>
+                  <p className="text-gray-400 text-xs">Mon–Sun, 8am – 8pm</p>
                 </div>
               </li>
               <li className="flex items-start gap-2">
                 <FiMail className="text-secondary mt-0.5 flex-shrink-0" size={16} />
                 <div>
-                  <p className="font-medium text-xs md:text-sm">hello@sarvmaan.com</p>
+                  <p className="font-medium text-xs md:text-sm">contact@sarvmaan.com</p>
                   <p className="text-gray-400 text-xs">Email 24/7</p>
                 </div>
               </li>
               <li className="flex items-start gap-2">
                 <FiMapPin className="text-secondary mt-0.5 flex-shrink-0" size={16} />
                 <div>
-                  <p className="font-medium text-xs md:text-sm">Bhavdhan, Pune</p>
+                  <p className="font-medium text-xs md:text-sm">Bavdhan, Pune</p>
                   <p className="text-gray-400 text-xs">Near Chaundhe Lake</p>
                 </div>
               </li>
@@ -134,13 +188,13 @@ export default function Footer() {
             &copy; 2017–{currentYear} SarvMaan Tech Solutions. All rights reserved.
           </p>
           <div className="flex gap-3 md:gap-6 flex-wrap justify-center">
-            <a href="#" className="text-gray-400 hover:text-secondary transition text-xs">
-              Privacy
+            <a href="/legal" className="text-gray-400 hover:text-secondary transition text-xs">
+              Privacy Policy
             </a>
-            <a href="#" className="text-gray-400 hover:text-secondary transition text-xs">
-              Terms
+            <a href="/legal" className="text-gray-400 hover:text-secondary transition text-xs">
+              Terms & Conditions
             </a>
-            <a href="#" className="text-gray-400 hover:text-secondary transition text-xs">
+            <a href="/legal" className="text-gray-400 hover:text-secondary transition text-xs">
               Disclaimer
             </a>
           </div>

@@ -21,20 +21,6 @@ const testimonials = [
 The quality of work delivered was excellent and I encourage the team to continue with this high standard. Keep up the great work!.`,
     rating: 5,
   },
-  {
-    id: 3,
-    name: 'Vikram',
-    role: 'Corporate Client',
-    testimonial: 'Perfect entertainment space for the family. Worth every rupee invested.',
-    rating: 5,
-  },
-  {
-    id: 4,
-    name: 'Sharma Family',
-    role: 'Homeowners, Hadapsar',
-    testimonial: 'Every room looks like a magazine cover. Best decision we made!',
-    rating: 5,
-  },
 ];
 
 export default function TestimonialsSection() {

@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   robots: "index, follow",
   openGraph: {
     type: "website",
-    url: "https://sarvmaanhomesuperhero.com",
+    url: "https://sarvmaan.com",
     title: "Sarvmaan Home Superhero | Premium Interior Design",
     description: "Transform your house into your dream home with Sarvmaan Home Superhero",
     images: [

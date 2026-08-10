@@ -367,7 +367,7 @@ npm start
 - **Email**: hello@sarvmaan.com
 
 ### Project Information
-- **URL**: https://sarvmaan-interiors.com (to be configured)
+- **URL**: https://sarvmaan.com (configured)
 - **Version**: 1.0.0
 - **Status**: Production Ready
 - **Last Build**: Successful ✅

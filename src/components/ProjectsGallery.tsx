@@ -102,12 +102,12 @@ export default function ProjectsGallery() {
                     priority={index < 3}
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-end p-3 md:p-4">
-                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 w-full">
+                    <div className="opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 w-full">
                       <h3 className="text-white text-base md:text-lg font-bold">{project.title}</h3>
                       <p className="text-gray-200 text-xs md:text-sm">{project.location}</p>
                     </div>
                   </div>
-                  <div className="absolute top-3 right-3 bg-secondary text-white px-3 py-1 rounded-full text-xs font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="absolute top-3 right-3 bg-secondary text-white px-3 py-1 rounded-full text-xs font-semibold opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
                     View
                   </div>
                 </div>

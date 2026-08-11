@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     description: "Transform your house into your dream home with Sarvmaan Home Superhero",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&h=630&fit=crop",
+        url: "/images/hero-home.webp",
         width: 1200,
         height: 630,
       },

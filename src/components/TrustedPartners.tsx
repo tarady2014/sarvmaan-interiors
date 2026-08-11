@@ -2,26 +2,49 @@
 
 import { motion } from 'framer-motion';
 
+// Color palette for brand circles
+const brandColors = [
+  'bg-blue-500',
+  'bg-red-500',
+  'bg-green-500',
+  'bg-purple-500',
+  'bg-orange-500',
+  'bg-pink-500',
+  'bg-indigo-500',
+  'bg-cyan-500',
+  'bg-amber-500',
+  'bg-emerald-500',
+  'bg-rose-500',
+  'bg-violet-500',
+  'bg-teal-500',
+  'bg-sky-500',
+];
+
 export default function TrustedPartners() {
   const partnerCategories = [
     {
       title: 'Hardware & Furniture Fittings',
+      description: 'Premium hardware and fittings from industry‑leading brands ensure smooth functionality, durability, and long‑lasting performance in every interior project.',
       brands: ['Hettich', 'Hafele', 'Blum', 'Godrej', 'Grass', 'Dorma Kaba'],
     },
     {
       title: 'Laminates & Surface Solutions',
+      description: 'High‑quality laminates and surface materials provide superior finish, texture, and style for kitchens, wardrobes, and home interiors.',
       brands: ['Greenlam', 'Century Plywood', 'Royale Touche', 'Stylam'],
     },
     {
       title: 'Bathroom Fittings',
+      description: 'Top‑tier bathroom fittings deliver reliability, modern aesthetics, and long‑lasting performance for premium bath spaces.',
       brands: ['Jaquar', 'Kohler', 'Grohe', 'Hindware', 'Cera'],
     },
     {
       title: 'Electrical & Lighting',
+      description: 'Trusted electrical and lighting brands help us create safe, efficient, and beautifully illuminated interiors.',
       brands: ['Legrand', 'Schneider Electric', 'Havells', 'Wipro Lighting'],
     },
     {
-      title: 'Plywood & MDF Boards',
+      title: 'Plywood, MDF & Boards',
+      description: 'Strong, durable plywood and boards form the backbone of our modular furniture, ensuring stability and long‑term quality.',
       brands: ['Century Ply', 'Greenply', 'Duro Ply', 'Kitply'],
     },
   ];
@@ -41,12 +64,12 @@ export default function TrustedPartners() {
             Our Trusted Partners
           </h2>
           <p className="text-sm md:text-base text-gray-600 max-w-2xl mx-auto">
-            We partner with industry-leading brands to deliver premium quality materials and fittings for your dream interiors
+            We work with industry‑leading brands to source premium materials, fittings, and hardware for your interior projects.
           </p>
         </motion.div>
 
         {/* Partner Categories */}
-        <div className="space-y-10 md:space-y-14">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {partnerCategories.map((category, categoryIndex) => (
             <motion.div
               key={category.title}
@@ -54,26 +77,31 @@ export default function TrustedPartners() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
               viewport={{ once: true }}
+              className="bg-white rounded-lg p-6 md:p-8 border border-gray-200 hover:shadow-lg hover:border-secondary/50 transition-all duration-300"
             >
               {/* Category Title */}
-              <h3 className="text-lg md:text-xl font-bold text-primary mb-6 md:mb-8 relative pl-4">
-                <span className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-6 bg-secondary rounded-full"></span>
+              <h3 className="text-lg md:text-xl font-bold text-primary mb-3">
                 {category.title}
               </h3>
+              
+              {/* Category Description */}
+              <p className="text-xs md:text-sm text-gray-600 leading-relaxed mb-5">
+                {category.description}
+              </p>
 
-              {/* Brand Grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4">
-                {category.brands.map((brand, brandIndex) => (
+              {/* Brand List - Colored circles */}
+              <div className="flex flex-wrap gap-2 justify-center md:justify-start">
+                {category.brands.map((brand, idx) => (
                   <motion.div
                     key={brand}
-                    initial={{ opacity: 0, scale: 0.9 }}
+                    initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.4, delay: categoryIndex * 0.1 + brandIndex * 0.02 }}
+                    transition={{ duration: 0.3, delay: idx * 0.05 }}
                     viewport={{ once: true }}
-                    className="flex items-center justify-center p-4 md:p-6 bg-white rounded-lg border border-gray-200 hover:shadow-lg hover:border-secondary/50 hover:bg-secondary/5 transition-all duration-300 group cursor-pointer min-h-24 md:min-h-28"
+                    className={`flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-full ${brandColors[idx % brandColors.length]} text-white group cursor-pointer hover:shadow-lg hover:scale-105 transition-all duration-300`}
+                    title={brand}
                   >
-                    {/* Brand Name */}
-                    <p className="text-center text-sm md:text-base font-semibold text-foreground group-hover:text-secondary transition-colors duration-300 line-clamp-3">
+                    <p className="text-center text-[10px] md:text-xs font-bold line-clamp-2 px-1.5 leading-tight">
                       {brand}
                     </p>
                   </motion.div>
@@ -92,8 +120,8 @@ export default function TrustedPartners() {
           className="mt-12 md:mt-16 pt-8 md:pt-12 border-t border-gray-200 text-center"
         >
           <p className="text-sm md:text-base text-gray-600">
-            Using only authentic, ISI-certified materials from trusted brands ensures your interiors are built to last. <br className="hidden md:block" />
-            <span className="text-secondary font-semibold">Quality that stands the test of time.</span>
+            Every material we source is selected for durability and excellence. <br className="hidden md:block" />
+            <span className="text-secondary font-semibold">Premium quality, industry-certified, built to last.</span>
           </p>
         </motion.div>
       </div>

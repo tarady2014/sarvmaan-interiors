@@ -5,11 +5,20 @@ import { Resend } from 'resend';
 function getResendClient(request: NextRequest) {
   // For Cloudflare Pages, access env from request.cf or use process.env
   // Cloudflare Pages now requires accessing via request context
+  console.log('[DEBUG] Getting Resend client...');
+  console.log('[DEBUG] request.env:', typeof (request as any).env);
+  console.log('[DEBUG] process.env.RESEND_API_KEY exists:', !!process.env.RESEND_API_KEY);
+  
   const apiKey = (request as any).env?.RESEND_API_KEY || process.env.RESEND_API_KEY;
+  
+  console.log('[DEBUG] apiKey found:', !!apiKey);
+  console.log('[DEBUG] apiKey length:', apiKey?.length);
   
   if (!apiKey) {
     throw new Error('RESEND_API_KEY environment variable is not set');
   }
+  
+  console.log('[DEBUG] Creating Resend client with API key');
   return new Resend(apiKey);
 }
 
@@ -22,12 +31,16 @@ function getBaseUrl(request: NextRequest): string {
 
 export async function POST(request: NextRequest) {
   try {
+    console.log('\n🚀 [API] Contact form submission received');
+    
     // Get Resend client (will throw if API key is missing)
     let resend;
     try {
       resend = getResendClient(request);
+      console.log('✅ [API] Resend client initialized successfully');
     } catch (error) {
-      console.error('RESEND_API_KEY is missing or empty');
+      console.error('❌ [API] Failed to initialize Resend client');
+      console.error('Error:', error instanceof Error ? error.message : String(error));
       return NextResponse.json(
         { error: 'Email service configuration error. Please try again later.' },
         { status: 500 }
@@ -35,7 +48,11 @@ export async function POST(request: NextRequest) {
     }
 
     const baseUrl = getBaseUrl(request);
+    console.log('[API] Base URL:', baseUrl);
+    
     const body = await request.json();
+    console.log('[API] Request body received');
+    
     const { fullName, email, phone, city, projectType, timeline, message } = body;
 
     // Validate required fields

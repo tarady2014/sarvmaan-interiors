@@ -2,8 +2,11 @@ import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
 // Helper function to get Resend instance (lazy load API key)
-function getResendClient() {
-  const apiKey = process.env.RESEND_API_KEY;
+function getResendClient(request: NextRequest) {
+  // For Cloudflare Pages, access env from request.cf or use process.env
+  // Cloudflare Pages now requires accessing via request context
+  const apiKey = (request as any).env?.RESEND_API_KEY || process.env.RESEND_API_KEY;
+  
   if (!apiKey) {
     throw new Error('RESEND_API_KEY environment variable is not set');
   }
@@ -22,7 +25,7 @@ export async function POST(request: NextRequest) {
     // Get Resend client (will throw if API key is missing)
     let resend;
     try {
-      resend = getResendClient();
+      resend = getResendClient(request);
     } catch (error) {
       console.error('RESEND_API_KEY is missing or empty');
       return NextResponse.json(

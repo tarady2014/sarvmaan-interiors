@@ -55,10 +55,6 @@
     /* Force light mode rendering */
     background: #ffffff;
     color: #1a1410;
-    
-    /* Prevent color inversion on iOS */
-    -webkit-filter: invert(0);
-    filter: invert(0);
   }
 }
 
@@ -136,5 +132,18 @@
     color: var(--text-light);
     font-weight: 500;
     letter-spacing: 0.3px;
+  }
+}
+
+@layer components {
+  button:focus,
+  button:active,
+  button:focus-visible {
+    outline: none !important;
+  }
+
+  /* Force text color from inline styles to override Tailwind utilities */
+  button {
+    color: inherit !important;
   }
 }

@@ -29,12 +29,7 @@ export default function Header() {
   ];
 
   return (
-    <header
-      className={`fixed w-full top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-soft'
-          : 'bg-white/80 backdrop-blur-md'
-      }`}
+    <header className="fixed top-0 left-0 right-0 w-full z-50 bg-white shadow-md transition-shadow duration-300"
     >
       <nav className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
         <Link href="/" className="flex items-center gap-3">
@@ -75,7 +70,7 @@ export default function Header() {
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden"
+          className="md:hidden text-primary hover:text-secondary transition-colors"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
@@ -88,14 +83,28 @@ export default function Header() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
-          className="md:hidden bg-white border-t border-gray-200"
+          transition={{ duration: 0.2 }}
+          style={{
+            position: 'fixed',
+            top: '64px',
+            left: 0,
+            right: 0,
+            width: '100%',
+            backgroundColor: 'rgba(255, 255, 255, 0.95)',
+            backdropFilter: 'blur(12px)',
+            borderTop: '1px solid #e5e7eb',
+            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)',
+            zIndex: 49,
+            display: 'md:none',
+          }}
+          className="md:hidden"
         >
-          <div className="flex flex-col p-4 gap-4">
+          <div className="flex flex-col p-4 gap-4 max-w-7xl mx-auto">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-primary hover:text-secondary transition-colors"
+                className="text-primary hover:text-secondary transition-colors font-medium py-2"
                 onClick={() => setIsOpen(false)}
               >
                 {link.label}
@@ -103,7 +112,7 @@ export default function Header() {
             ))}
             <Link
               href="/contact"
-              className="bg-secondary text-white px-6 py-2 rounded-full text-center"
+              className="bg-secondary text-white px-6 py-2 rounded-full text-center font-medium hover:bg-accent transition-colors"
               onClick={() => setIsOpen(false)}
             >
               Book Consultation

@@ -5,7 +5,6 @@ import ProjectsGallery from '@/components/ProjectsGallery';
 import ProcessSection from '@/components/ProcessSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import TrustedPartners from '@/components/TrustedPartners';
-import FloatingContactCard from '@/components/FloatingContactCard';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -17,7 +16,6 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       <HeroSection />
-      <FloatingContactCard />
       <ServicesSection />
       <BuildersSection />
       <ProjectsGallery />

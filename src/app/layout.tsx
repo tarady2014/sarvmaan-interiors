@@ -56,9 +56,9 @@ export default function RootLayout({ children }: LayoutProps) {
         <meta name="color-scheme" content="light only" />
         <meta name="theme-color" content="#ffffff" />
       </head>
-      <body className="min-h-full flex flex-col bg-white text-gray-900">
+      <body className="bg-white text-gray-900">
         <Header />
-        <main className="flex-1 pt-16">
+        <main className="pt-[80px]">
           {children}
         </main>
         <Footer />

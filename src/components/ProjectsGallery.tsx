@@ -62,22 +62,32 @@ export default function ProjectsGallery() {
 
         {/* Filters - Horizontal scroll on mobile */}
         <div className="flex gap-2 md:gap-3 justify-start md:justify-center mb-8 md:mb-12 overflow-x-auto pb-2">
-          {categories.map((cat) => (
+          {categories.map((cat) => {
+            const isSelected = selectedCategory === cat.id;
+            return (
             <button
               key={cat.id}
               onClick={() => {
                 setSelectedCategory(cat.id);
                 setSelectedProject(null);
               }}
-              className={`px-4 md:px-6 py-2 rounded-full font-medium text-sm md:text-base whitespace-nowrap transition-all ${
-                selectedCategory === cat.id
-                  ? 'bg-secondary text-white shadow-base'
-                  : 'bg-light text-primary border border-gray-300 hover:border-secondary'
-              }`}
+              style={{
+                padding: '8px 16px',
+                borderRadius: '9999px',
+                fontWeight: '600',
+                fontSize: '14px',
+                border: isSelected ? 'none' : '1px solid #d1d5db',
+                cursor: 'pointer',
+                transition: 'all 300ms ease-in-out',
+                backgroundColor: isSelected ? '#1a1410' : '#faf8f6',
+                color: isSelected ? '#d4af37' : '#1a1410',
+                whiteSpace: 'nowrap',
+              } as React.CSSProperties}
             >
               {cat.label}
             </button>
-          ))}
+            );
+          })}
         </div>
 
         {/* Gallery Grid - Full width on mobile, 2x2 on tablet, 3 columns on desktop */}

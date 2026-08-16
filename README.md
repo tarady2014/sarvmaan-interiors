@@ -1,8 +1,10 @@
 # SarvMaan Interiors - Premium Interior Design Website
 
 > **Production-ready interior design website** built with Next.js 16, React 19, and Tailwind CSS 4
+>
+> **Last Updated:** August 15, 2026
 
-A complete, fully responsive website for interior design businesses with portfolio showcas**For Production (Cloudflare Pages):**
+A complete, fully responsive website for interior design businesses with portfolio showcase**For Production (Cloudflare Pages):**
 - Keep the same API key from `.env.local`
 - Set environment variable in Cloudflare dashboard:
   1. Go to Cloudflare Pages → Your Project

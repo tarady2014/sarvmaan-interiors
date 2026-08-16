@@ -255,12 +255,17 @@ export async function POST(request: NextRequest) {
 
     // Check if both emails were sent successfully
     if (businessEmailResult.error || userEmailResult.error) {
-      console.error('Email sending error:', {
-        businessEmail: businessEmailResult.error,
-        userEmail: userEmailResult.error,
-      });
+      console.error('❌ [API] Email sending error:');
+      console.error('[API] Business Email Error:', JSON.stringify(businessEmailResult.error, null, 2));
+      console.error('[API] User Email Error:', JSON.stringify(userEmailResult.error, null, 2));
       return NextResponse.json(
-        { error: 'Failed to send email. Please try again.' },
+        { 
+          error: 'Failed to send email. Please try again.',
+          details: {
+            businessError: businessEmailResult.error?.message || String(businessEmailResult.error),
+            userError: userEmailResult.error?.message || String(userEmailResult.error),
+          }
+        },
         { status: 500 }
       );
     }

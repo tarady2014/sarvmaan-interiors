@@ -1,7 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Helper function to get Resend instance (lazy load API key)
+function getResendClient() {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    throw new Error('RESEND_API_KEY environment variable is not set');
+  }
+  return new Resend(apiKey);
+}
 
 // Helper function to get the base URL
 function getBaseUrl(request: NextRequest): string {
@@ -12,6 +19,18 @@ function getBaseUrl(request: NextRequest): string {
 
 export async function POST(request: NextRequest) {
   try {
+    // Get Resend client (will throw if API key is missing)
+    let resend;
+    try {
+      resend = getResendClient();
+    } catch (error) {
+      console.error('RESEND_API_KEY is missing or empty');
+      return NextResponse.json(
+        { error: 'Email service configuration error. Please try again later.' },
+        { status: 500 }
+      );
+    }
+
     const baseUrl = getBaseUrl(request);
     const body = await request.json();
     const { fullName, email, phone, city, projectType, timeline, message } = body;

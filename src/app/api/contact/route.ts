@@ -4,21 +4,12 @@ import { Resend } from 'resend';
 // Helper function to get Resend instance (lazy load API key)
 function getResendClient(request: NextRequest) {
   // For Cloudflare Pages, access env from request.cf or use process.env
-  // Cloudflare Pages now requires accessing via request context
-  console.log('[DEBUG] Getting Resend client...');
-  console.log('[DEBUG] request.env:', typeof (request as any).env);
-  console.log('[DEBUG] process.env.RESEND_API_KEY exists:', !!process.env.RESEND_API_KEY);
-  
   const apiKey = (request as any).env?.RESEND_API_KEY || process.env.RESEND_API_KEY;
-  
-  console.log('[DEBUG] apiKey found:', !!apiKey);
-  console.log('[DEBUG] apiKey length:', apiKey?.length);
   
   if (!apiKey) {
     throw new Error('RESEND_API_KEY environment variable is not set');
   }
   
-  console.log('[DEBUG] Creating Resend client with API key');
   return new Resend(apiKey);
 }
 

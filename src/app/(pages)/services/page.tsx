@@ -315,6 +315,7 @@ export default function Services() {
             <a
               href="/contact"
               className="inline-block bg-white text-primary px-6 md:px-8 py-3 md:py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-sm md:text-base"
+              style={{ backgroundColor: '#d4af37', color: '#ffffff', textDecoration: 'none' }}
             >
               Book Free Consultation
             </a>

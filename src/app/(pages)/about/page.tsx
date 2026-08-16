@@ -42,7 +42,7 @@ export default function About() {
       <HeroImage 
         title="About Sarvmaan Home Superhero"
         subtitle="Premium interior design solutions since 2017"
-        imageUrl="/images/sarvmaan-office2.webp"
+        imageUrl="/images/hero-about.webp"
         imageAlt="About Sarvmaan Home Superhero"
       />
 
@@ -211,7 +211,8 @@ export default function About() {
             </p>
             <Link
               href="/contact"
-              className="inline-block bg-secondary text-white px-6 md:px-8 py-3 md:py-4 rounded-lg font-semibold hover:bg-secondary/90 transition-colors text-sm md:text-base"
+              className="inline-block text-primary px-6 md:px-8 py-3 md:py-4 rounded-lg font-semibold hover:opacity-90 transition-colors text-sm md:text-base"
+              style={{ backgroundColor: '#d4af37', color: '#1a1410' }}
             >
               Book a Consultation
             </Link>

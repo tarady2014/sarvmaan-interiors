@@ -8,69 +8,17 @@ import HeroImage from '@/components/HeroImage';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
+    fullName: '',
     phone: '',
-    location: '',
-    serviceCategory: '',
-    service: '',
-    bhkType: '',
-    commercialType: '',
-    carpetArea: '',
-    budgetRange: '',
+    email: '',
+    city: '',
+    projectType: '',
     timeline: '',
     message: '',
   });
 
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  // Service categories and options matching Services Page
-  const serviceOptions = {
-    'Core Solutions': [
-      'Modular Kitchen Design',
-      'Full Home Interiors',
-      'Bedroom Interior',
-      'Bathroom Interior',
-    ],
-    'Design Services': [
-      '2D & 3D Interior Design',
-      'Material & Color Consultation',
-      'Lighting Design',
-    ],
-    'Execution Services': [
-      'Carpentry & Woodwork',
-      'False Ceiling & Integrated Lighting',
-      'Painting & Wall Finishes',
-      'Turnkey Execution & Site Supervision',
-    ],
-    'Specialized': [
-      'Modular Storage Solutions',
-      'Commercial Interiors',
-      'Renovation & Makeover Services',
-      'Smart Home & Premium Add-ons',
-    ],
-  };
-
-  const bhkOptions = ['1 BHK', '2 BHK', '3 BHK', '4 BHK', '4+ BHK'];
-  const commercialOptions = ['Office', 'Retail', 'Café/Restaurant', 'Healthcare', 'Other'];
-  const budgetOptions = [
-    '₹1-3 Lakhs',
-    '₹3-5 Lakhs',
-    '₹5-10 Lakhs',
-    '₹10-20 Lakhs',
-    '₹20+ Lakhs',
-  ];
-  const timelineOptions = ['Immediate', '1-3 months', '3-6 months', '6+ months'];
-
-  const isHomeInteriorService = () => {
-    const homeServices = ['Full Home Interiors', 'Bedroom Interior', 'Bathroom Interior'];
-    return homeServices.includes(formData.service);
-  };
-
-  const isCommercialService = () => {
-    return formData.service === 'Commercial Interiors';
-  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -91,16 +39,11 @@ export default function Contact() {
       if (response.ok) {
         setSubmitted(true);
         setFormData({ 
-          name: '', 
-          email: '', 
+          fullName: '', 
           phone: '', 
-          location: '',
-          serviceCategory: '',
-          service: '',
-          bhkType: '',
-          commercialType: '',
-          carpetArea: '',
-          budgetRange: '',
+          email: '', 
+          city: '',
+          projectType: '',
           timeline: '',
           message: '' 
         });
@@ -125,7 +68,7 @@ export default function Contact() {
       <HeroImage 
         title="Get in Touch"
         subtitle="Have a project in mind? Let's discuss how we can help"
-        imageUrl="/images/hero-about.webp"
+        imageUrl="/images/hero-contact.webp"
         imageAlt="Contact Sarvmaan Home Superhero"
       />
 
@@ -183,25 +126,27 @@ export default function Contact() {
               )}
 
               <form onSubmit={handleSubmit} className="space-y-3 md:space-y-4">
-                {/* Name & Phone */}
+                {/* Full Name */}
+                <div>
+                  <label className="block text-xs md:text-sm font-semibold text-foreground/70 mb-1 md:mb-2">
+                    Full Name *
+                  </label>
+                  <input
+                    type="text"
+                    name="fullName"
+                    value={formData.fullName}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary text-sm"
+                    placeholder="Enter your full name"
+                  />
+                </div>
+
+                {/* Phone Number and Email */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
                   <div>
                     <label className="block text-xs md:text-sm font-semibold text-foreground/70 mb-1 md:mb-2">
-                      Full Name *
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary text-sm"
-                      placeholder="Your name"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs md:text-sm font-semibold text-foreground/70 mb-1 md:mb-2">
-                      Phone *
+                      Phone Number *
                     </label>
                     <input
                       type="tel"
@@ -210,16 +155,12 @@ export default function Contact() {
                       onChange={handleChange}
                       required
                       className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary text-sm"
-                      placeholder="+91 XXXXX XXXXX"
+                      placeholder="Your primary contact number"
                     />
                   </div>
-                </div>
-
-                {/* Email & Location */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
                   <div>
                     <label className="block text-xs md:text-sm font-semibold text-foreground/70 mb-1 md:mb-2">
-                      Email *
+                      Email Address *
                     </label>
                     <input
                       type="email"
@@ -228,178 +169,71 @@ export default function Contact() {
                       onChange={handleChange}
                       required
                       className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary text-sm"
-                      placeholder="your@email.com"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs md:text-sm font-semibold text-foreground/70 mb-1 md:mb-2">
-                      City / Location *
-                    </label>
-                    <input
-                      type="text"
-                      name="location"
-                      value={formData.location}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary text-sm"
-                      placeholder="Pune, Bavdhan..."
+                      placeholder="Your email for sharing project details"
                     />
                   </div>
                 </div>
 
-                {/* Service Category */}
+                {/* City / Area and Project Type */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+                  <div>
+                    <label className="block text-xs md:text-sm font-semibold text-foreground/70 mb-1 md:mb-2">
+                      City / Area *
+                    </label>
+                    <input
+                      type="text"
+                      name="city"
+                      value={formData.city}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary text-sm"
+                      placeholder="Where is your property located?"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs md:text-sm font-semibold text-foreground/70 mb-1 md:mb-2">
+                      Project Type *
+                    </label>
+                    <select
+                      name="projectType"
+                      value={formData.projectType}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary text-sm"
+                    >
+                      <option value="">Select your project type</option>
+                      <option value="home-interior">Home Interior</option>
+                      <option value="kitchen">Kitchen</option>
+                      <option value="wardrobe">Wardrobe</option>
+                      <option value="commercial">Commercial</option>
+                      <option value="renovation">Renovation</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* Approx. Timeline */}
                 <div>
                   <label className="block text-xs md:text-sm font-semibold text-foreground/70 mb-1 md:mb-2">
-                    Service Category *
+                    Approx. Timeline *
                   </label>
                   <select
-                    name="serviceCategory"
-                    value={formData.serviceCategory}
+                    name="timeline"
+                    value={formData.timeline}
                     onChange={handleChange}
                     required
                     className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary text-sm"
                   >
-                    <option value="">Select a category</option>
-                    <option value="Core Solutions">Core Solutions</option>
-                    <option value="Design Services">Design Services</option>
-                    <option value="Execution Services">Execution Services</option>
-                    <option value="Specialized">Specialized Services</option>
+                    <option value="">When do you plan to start?</option>
+                    <option value="immediately">Immediately</option>
+                    <option value="1-3-months">1–3 months</option>
+                    <option value="3-6-months">3–6 months</option>
                   </select>
                 </div>
 
-                {/* Specific Service */}
-                {formData.serviceCategory && (
-                  <div>
-                    <label className="block text-xs md:text-sm font-semibold text-foreground/70 mb-1 md:mb-2">
-                      Select Service *
-                    </label>
-                    <select
-                      name="service"
-                      value={formData.service}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary text-sm"
-                    >
-                      <option value="">Choose a service</option>
-                      {serviceOptions[formData.serviceCategory as keyof typeof serviceOptions]?.map((svc) => (
-                        <option key={svc} value={svc}>
-                          {svc}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                )}
-
-                {/* Conditional Fields - Home Interiors */}
-                {isHomeInteriorService() && (
-                  <div>
-                    <label className="block text-xs md:text-sm font-semibold text-foreground/70 mb-1 md:mb-2">
-                      Property Type *
-                    </label>
-                    <select
-                      name="bhkType"
-                      value={formData.bhkType}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary text-sm"
-                    >
-                      <option value="">Select property type</option>
-                      {bhkOptions.map((bhk) => (
-                        <option key={bhk} value={bhk}>
-                          {bhk}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                )}
-
-                {/* Conditional Fields - Commercial */}
-                {isCommercialService() && (
-                  <div>
-                    <label className="block text-xs md:text-sm font-semibold text-foreground/70 mb-1 md:mb-2">
-                      Commercial Type *
-                    </label>
-                    <select
-                      name="commercialType"
-                      value={formData.commercialType}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary text-sm"
-                    >
-                      <option value="">Select type</option>
-                      {commercialOptions.map((type) => (
-                        <option key={type} value={type}>
-                          {type}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                )}
-
-                {/* Carpet Area */}
-                {formData.service && (
-                  <div>
-                    <label className="block text-xs md:text-sm font-semibold text-foreground/70 mb-1 md:mb-2">
-                      Carpet Area (sq ft) *
-                    </label>
-                    <input
-                      type="number"
-                      name="carpetArea"
-                      value={formData.carpetArea}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary text-sm"
-                      placeholder="e.g., 1500"
-                    />
-                  </div>
-                )}
-
-                {/* Budget & Timeline */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-                  <div>
-                    <label className="block text-xs md:text-sm font-semibold text-foreground/70 mb-1 md:mb-2">
-                      Budget Range *
-                    </label>
-                    <select
-                      name="budgetRange"
-                      value={formData.budgetRange}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary text-sm"
-                    >
-                      <option value="">Select budget</option>
-                      {budgetOptions.map((budget) => (
-                        <option key={budget} value={budget}>
-                          {budget}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-xs md:text-sm font-semibold text-foreground/70 mb-1 md:mb-2">
-                      Timeline *
-                    </label>
-                    <select
-                      name="timeline"
-                      value={formData.timeline}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary text-sm"
-                    >
-                      <option value="">Select timeline</option>
-                      {timelineOptions.map((time) => (
-                        <option key={time} value={time}>
-                          {time}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-
-                {/* Message */}
+                {/* Message / Requirements */}
                 <div>
                   <label className="block text-xs md:text-sm font-semibold text-foreground/70 mb-1 md:mb-2">
-                    Additional Details
+                    Message / Requirements
                   </label>
                   <textarea
                     name="message"
@@ -407,7 +241,7 @@ export default function Contact() {
                     onChange={handleChange}
                     rows={3}
                     className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary text-sm"
-                    placeholder="Any specific requirements or ideas for your project..."
+                    placeholder="Tell us about your project, requirements, or any specific preferences"
                   />
                 </div>
 
@@ -419,7 +253,7 @@ export default function Contact() {
                   className="w-full py-3 md:py-4 rounded-lg font-semibold hover:opacity-90 transition-opacity disabled:opacity-50 text-sm md:text-base flex items-center justify-center gap-2"
                 >
                   <FiSend size={18} />
-                  {loading ? 'Sending...' : 'Request Free Consultation'}
+                  {loading ? 'Sending...' : 'Book Consultation'}
                 </button>
               </form>
             </motion.div>

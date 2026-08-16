@@ -11,10 +11,12 @@ interface FormState {
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
+    fullName: '',
     phone: '',
-    service: '',
+    email: '',
+    city: '',
+    projectType: '',
+    timeline: '',
     message: '',
   });
 
@@ -44,7 +46,7 @@ export default function ContactForm() {
           status: 'success',
           message: 'Thank you! We will contact you shortly.',
         });
-        setFormData({ name: '', email: '', phone: '', service: '', message: '' });
+        setFormData({ fullName: '', phone: '', email: '', city: '', projectType: '', timeline: '', message: '' });
       } else {
         throw new Error('Failed to submit form');
       }
@@ -65,33 +67,21 @@ export default function ContactForm() {
       transition={{ duration: 0.6 }}
       viewport={{ once: true }}
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        <div>
-          <label className="block text-primary font-semibold mb-2">Full Name *</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            className="w-full px-4 py-3 border-2 border-light rounded-lg focus:border-secondary focus:outline-none transition"
-            placeholder="Your name"
-          />
-        </div>
-        <div>
-          <label className="block text-primary font-semibold mb-2">Email *</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            className="w-full px-4 py-3 border-2 border-light rounded-lg focus:border-secondary focus:outline-none transition"
-            placeholder="your@email.com"
-          />
-        </div>
+      {/* Full Name */}
+      <div className="mb-6">
+        <label className="block text-primary font-semibold mb-2">Full Name *</label>
+        <input
+          type="text"
+          name="fullName"
+          value={formData.fullName}
+          onChange={handleChange}
+          required
+          className="w-full px-4 py-3 border-2 border-light rounded-lg focus:border-secondary focus:outline-none transition"
+          placeholder="Enter your full name"
+        />
       </div>
 
+      {/* Phone Number and Email - 2 columns */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         <div>
           <label className="block text-primary font-semibold mb-2">Phone Number *</label>
@@ -102,38 +92,83 @@ export default function ContactForm() {
             onChange={handleChange}
             required
             className="w-full px-4 py-3 border-2 border-light rounded-lg focus:border-secondary focus:outline-none transition"
-            placeholder="+91 9876543210"
+            placeholder="Your primary contact number"
           />
         </div>
         <div>
-          <label className="block text-primary font-semibold mb-2">Service Type *</label>
+          <label className="block text-primary font-semibold mb-2">Email Address *</label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+            className="w-full px-4 py-3 border-2 border-light rounded-lg focus:border-secondary focus:outline-none transition"
+            placeholder="Your email for sharing project details"
+          />
+        </div>
+      </div>
+
+      {/* City and Project Type - 2 columns */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div>
+          <label className="block text-primary font-semibold mb-2">City / Area *</label>
+          <input
+            type="text"
+            name="city"
+            value={formData.city}
+            onChange={handleChange}
+            required
+            className="w-full px-4 py-3 border-2 border-light rounded-lg focus:border-secondary focus:outline-none transition"
+            placeholder="Where is your property located?"
+          />
+        </div>
+        <div>
+          <label className="block text-primary font-semibold mb-2">Project Type *</label>
           <select
-            name="service"
-            value={formData.service}
+            name="projectType"
+            value={formData.projectType}
             onChange={handleChange}
             required
             className="w-full px-4 py-3 border-2 border-light rounded-lg focus:border-secondary focus:outline-none transition"
           >
-            <option value="">Select a service</option>
-            <option value="kitchen">Modular Kitchen</option>
+            <option value="">Select your project type</option>
+            <option value="home-interior">Home Interior</option>
+            <option value="kitchen">Kitchen</option>
             <option value="wardrobe">Wardrobe</option>
-            <option value="living">Living Room</option>
-            <option value="bedroom">Bedroom</option>
             <option value="commercial">Commercial</option>
-            <option value="renovation">Full Renovation</option>
+            <option value="renovation">Renovation</option>
           </select>
         </div>
       </div>
 
+      {/* Approx. Timeline */}
       <div className="mb-6">
-        <label className="block text-primary font-semibold mb-2">Message</label>
+        <label className="block text-primary font-semibold mb-2">Approx. Timeline *</label>
+        <select
+          name="timeline"
+          value={formData.timeline}
+          onChange={handleChange}
+          required
+          className="w-full px-4 py-3 border-2 border-light rounded-lg focus:border-secondary focus:outline-none transition"
+        >
+          <option value="">When do you plan to start?</option>
+          <option value="immediately">Immediately</option>
+          <option value="1-3-months">1–3 months</option>
+          <option value="3-6-months">3–6 months</option>
+        </select>
+      </div>
+
+      {/* Message / Requirements */}
+      <div className="mb-6">
+        <label className="block text-primary font-semibold mb-2">Message / Requirements</label>
         <textarea
           name="message"
           value={formData.message}
           onChange={handleChange}
           rows={5}
           className="w-full px-4 py-3 border-2 border-light rounded-lg focus:border-secondary focus:outline-none transition"
-          placeholder="Tell us about your project..."
+          placeholder="Tell us about your project, requirements, or any specific preferences"
         ></textarea>
       </div>
 

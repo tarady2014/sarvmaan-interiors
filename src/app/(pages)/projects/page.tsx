@@ -8,7 +8,7 @@ import { projects } from '@/data/projects';
 import { FiPlay, FiX, FiMapPin, FiCalendar } from 'react-icons/fi';
 import HeroImage from '@/components/HeroImage';
 
-type Category = 'all' | 'kitchen' | 'wardrobe' | 'hall' | 'tvunit' | 'mandir' | 'bedroom' | 'renovation' | 'commercial';
+type Category = 'all' | 'kitchen' | 'wardrobe' | 'hall' | 'tvunit' | 'mandir' | 'bedroom' | 'complete-home-interior' | 'commercial';
 
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState<Category>('all');
@@ -23,7 +23,7 @@ export default function Projects() {
     { id: 'mandir', label: 'Mandirs' },
     { id: 'bedroom', label: 'Bedrooms' },
     { id: 'commercial', label: 'Commercial' },
-    { id: 'renovation', label: 'Renovations' },
+    { id: 'complete-home-interior', label: 'Complete Home' },
   ];
 
   const filteredProjects = activeFilter === 'all' 
@@ -52,7 +52,7 @@ export default function Projects() {
                 onClick={() => setActiveFilter(filter.id)}
                 className={`px-2 sm:px-3 lg:px-5 py-1 sm:py-1.5 rounded-full font-medium text-xs sm:text-xs lg:text-sm transition-all whitespace-nowrap min-w-fit ${
                   activeFilter === filter.id
-                    ? 'bg-secondary text-white shadow-elevated'
+                    ? 'bg-primary text-white shadow-elevated'
                     : 'bg-light text-primary hover:bg-gray-200'
                 }`}
                 whileHover={{ scale: 1.05 }}
@@ -121,14 +121,10 @@ export default function Projects() {
                   </h3>
                   <p className="text-muted text-xs sm:text-sm mb-2 sm:mb-3 line-clamp-2">{project.description}</p>
 
-                  <div className="grid grid-cols-2 text-xs sm:text-sm gap-2 sm:gap-4 pt-2 sm:pt-4 border-t border-gray-200">
+                  <div className="grid grid-cols-1 text-xs sm:text-sm gap-2 sm:gap-4 pt-2 sm:pt-4 border-t border-gray-200">
                     <div>
                       <p className="text-muted text-xs mb-0.5 sm:mb-1">Location</p>
                       <p className="font-semibold text-primary">{project.location}</p>
-                    </div>
-                    <div>
-                      <p className="text-muted text-xs mb-0.5 sm:mb-1">Timeline</p>
-                      <p className="font-semibold text-primary">{project.timeline}</p>
                     </div>
                   </div>
                 </div>
@@ -188,7 +184,8 @@ export default function Projects() {
             </p>
             <Link
               href="/contact"
-              className="inline-block bg-secondary text-primary px-6 sm:px-8 py-2.5 sm:py-4 rounded-full font-semibold text-sm sm:text-base hover:bg-opacity-90 transition-all"
+              className="inline-block text-white px-6 sm:px-8 py-2.5 sm:py-4 rounded-full font-semibold text-sm sm:text-base hover:opacity-90 transition-all"
+              style={{ backgroundColor: '#d4af37' }}
             >
               Book Consultation
             </Link>
@@ -269,29 +266,7 @@ export default function Projects() {
                     </div>
                     <p className="font-semibold text-primary text-sm sm:text-base">{selectedProjectData.location}</p>
                   </div>
-                  <div className="bg-light p-3 sm:p-4 rounded-lg">
-                    <div className="flex items-center gap-2 mb-1 sm:mb-2">
-                      <FiCalendar className="text-secondary flex-shrink-0" size={16} />
-                      <p className="text-xs sm:text-sm font-medium text-foreground">Timeline</p>
-                    </div>
-                    <p className="font-semibold text-primary text-sm sm:text-base">{selectedProjectData.timeline}</p>
-                  </div>
                 </div>
-
-                {/* Materials - Only for photo type */}
-                {selectedProjectData.type === 'photo' && selectedProjectData.materials && (
-                  <div>
-                    <h3 className="text-base sm:text-lg font-bold text-primary mb-3 sm:mb-4">Materials Used</h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
-                      {selectedProjectData.materials.map((material, index) => (
-                        <div key={index} className="flex items-center gap-2 p-2 bg-light rounded">
-                          <span className="w-2 h-2 rounded-full bg-secondary flex-shrink-0"></span>
-                          <span className="text-xs sm:text-sm text-primary font-medium">{material}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
 
                 {/* CTA Button */}
                 <Link

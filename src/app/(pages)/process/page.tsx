@@ -81,8 +81,6 @@ export default function Process() {
             {[
               { title: 'Small Projects', time: '30-45 days', example: 'Single bedroom, wardrobe, kitchen' },
               { title: 'Medium Projects', time: '60-90 days', example: '2-3 room renovation' },
-              { title: 'Large Projects', time: '120+ days', example: 'Complete home renovation' },
-              { title: 'Commercial Projects', time: '90-180 days', example: 'Office, retail spaces' },
             ].map((item, idx) => (
               <motion.div
                 key={idx}
@@ -159,6 +157,7 @@ export default function Process() {
               <Link
                 href="/contact"
                 className="inline-block bg-white text-primary px-6 md:px-8 py-3 md:py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-sm md:text-base"
+                style={{ backgroundColor: '#d4af37', color: '#ffffff', textDecoration: 'none' }}
               >
                 Book Consultation
               </Link>

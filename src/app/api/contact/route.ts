@@ -270,9 +270,22 @@ export async function POST(request: NextRequest) {
       { status: 200 }
     );
   } catch (error) {
-    console.error('Form submission error:', error);
+    console.error('❌ Form submission error:');
+    if (error instanceof Error) {
+      console.error('Error message:', error.message);
+      console.error('Error stack:', error.stack);
+    } else {
+      console.error('Unknown error:', error);
+    }
+    
+    // More specific error messages
+    let errorMessage = 'Internal server error. Please try again later.';
+    if (error instanceof Error && error.message.includes('RESEND_API_KEY')) {
+      errorMessage = 'Email service is not configured. Please contact support.';
+    }
+    
     return NextResponse.json(
-      { error: 'Internal server error. Please try again later.' },
+      { error: errorMessage, details: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     );
   }

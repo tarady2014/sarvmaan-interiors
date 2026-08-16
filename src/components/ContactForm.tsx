@@ -41,6 +41,8 @@ export default function ContactForm() {
         body: JSON.stringify(formData),
       });
 
+      const data = await response.json();
+
       if (response.ok) {
         setFormState({
           status: 'success',
@@ -48,13 +50,15 @@ export default function ContactForm() {
         });
         setFormData({ fullName: '', phone: '', email: '', city: '', projectType: '', timeline: '', message: '' });
       } else {
-        throw new Error('Failed to submit form');
+        throw new Error(data.error || 'Failed to submit form');
       }
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Failed to submit form. Please try again.';
       setFormState({
         status: 'error',
-        message: 'Failed to submit form. Please try again.',
+        message: errorMessage,
       });
+      console.error('Form submission error:', error);
     }
   };
 

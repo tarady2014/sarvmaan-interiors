@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
@@ -19,7 +19,6 @@ export const metadata: Metadata = {
   title: "Sarvmaan Home Superhero | Premium Interior Design & Modular Kitchens",
   description: "Transform your house into your dream home with Sarvmaan Home Superhero. Award-winning interior design, modular kitchens, wardrobes, and full home renovations. 500+ projects completed.",
   keywords: "interior design, modular kitchen, wardrobes, home renovation, Pune interiors, premium design",
-  viewport: "width=device-width, initial-scale=1",
   robots: "index, follow",
   openGraph: {
     type: "website",
@@ -39,6 +38,11 @@ export const metadata: Metadata = {
     title: "Sarvmaan Home Superhero | Premium Interior Design",
     description: "Transform your house into your dream home with Sarvmaan Home Superhero",
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 interface LayoutProps {

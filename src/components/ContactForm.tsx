@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FiAlertCircle, FiCheckCircle } from 'react-icons/fi';
 
@@ -10,6 +10,7 @@ interface FormState {
 }
 
 export default function ContactForm() {
+  const [csrfToken, setCSRFToken] = useState('');
   const [formData, setFormData] = useState({
     fullName: '',
     phone: '',
@@ -25,6 +26,26 @@ export default function ContactForm() {
     message: '',
   });
 
+  // Fetch CSRF token on component mount
+  useEffect(() => {
+    const fetchCSRFToken = async () => {
+      try {
+        const response = await fetch('/api/csrf');
+        if (response.ok) {
+          const data = await response.json();
+          setCSRFToken(data.token);
+          console.log('✅ CSRF token fetched successfully');
+        } else {
+          console.error('Failed to fetch CSRF token');
+        }
+      } catch (error) {
+        console.error('Failed to fetch CSRF token:', error);
+      }
+    };
+
+    fetchCSRFToken();
+  }, []);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -38,7 +59,7 @@ export default function ContactForm() {
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, csrfToken }),
       });
 
       const data = await response.json();
@@ -49,7 +70,19 @@ export default function ContactForm() {
           message: 'Thank you! We will contact you shortly.',
         });
         setFormData({ fullName: '', phone: '', email: '', city: '', projectType: '', timeline: '', message: '' });
+        // Fetch a new CSRF token for next submission
+        const newTokenResponse = await fetch('/api/csrf');
+        if (newTokenResponse.ok) {
+          const newToken = await newTokenResponse.json();
+          setCSRFToken(newToken.token);
+        }
       } else {
+        // Always fetch a fresh token after any submission attempt (success or failure)
+        const newTokenResponse = await fetch('/api/csrf');
+        if (newTokenResponse.ok) {
+          const newToken = await newTokenResponse.json();
+          setCSRFToken(newToken.token);
+        }
         throw new Error(data.error || 'Failed to submit form');
       }
     } catch (error) {

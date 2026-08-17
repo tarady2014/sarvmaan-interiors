@@ -141,9 +141,4 @@
   button:focus-visible {
     outline: none !important;
   }
-
-  /* Force text color from inline styles to override Tailwind utilities */
-  button {
-    color: inherit !important;
-  }
 }

@@ -52,7 +52,7 @@ export default function Projects() {
                 onClick={() => setActiveFilter(filter.id)}
                 className={`px-2 sm:px-3 lg:px-5 py-1 sm:py-1.5 rounded-full font-medium text-xs sm:text-xs lg:text-sm transition-all whitespace-nowrap min-w-fit ${
                   activeFilter === filter.id
-                    ? 'bg-primary text-white shadow-elevated'
+                    ? 'bg-primary text-secondary shadow-elevated'
                     : 'bg-light text-primary hover:bg-gray-200'
                 }`}
                 whileHover={{ scale: 1.05 }}

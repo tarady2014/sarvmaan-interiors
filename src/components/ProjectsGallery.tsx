@@ -79,8 +79,8 @@ export default function ProjectsGallery() {
                 border: isSelected ? 'none' : '1px solid #d1d5db',
                 cursor: 'pointer',
                 transition: 'all 300ms ease-in-out',
-                backgroundColor: isSelected ? '#1a1410' : '#faf8f6',
-                color: isSelected ? '#d4af37' : '#1a1410',
+                backgroundColor: isSelected ? '#ffffff' : '#faf8f6',
+                color: isSelected ? '#1a1410' : '#1a1410',
                 whiteSpace: 'nowrap',
               } as React.CSSProperties}
             >

@@ -1,12 +1,13 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useState } from 'react';
-import { FiPhone, FiMail, FiMapPin, FiClock, FiSend } from 'react-icons/fi';
+import { useState, useEffect } from 'react';
+import { FiPhone, FiMail, FiMapPin, FiClock } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
 import HeroImage from '@/components/HeroImage';
 
 export default function Contact() {
+  const [csrfToken, setCSRFToken] = useState('');
   const [formData, setFormData] = useState({
     fullName: '',
     phone: '',
@@ -19,6 +20,23 @@ export default function Contact() {
 
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  // Fetch CSRF token on component mount
+  useEffect(() => {
+    const fetchCSRFToken = async () => {
+      try {
+        const response = await fetch('/api/csrf');
+        if (response.ok) {
+          const data = await response.json();
+          setCSRFToken(data.token);
+        }
+      } catch (error) {
+        console.error('Failed to fetch CSRF token:', error);
+      }
+    };
+
+    fetchCSRFToken();
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -33,7 +51,7 @@ export default function Contact() {
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, csrfToken }),
       });
 
       if (response.ok) {
@@ -47,7 +65,22 @@ export default function Contact() {
           timeline: '',
           message: '' 
         });
+        // Fetch a new CSRF token for next submission
+        const newTokenResponse = await fetch('/api/csrf');
+        if (newTokenResponse.ok) {
+          const newToken = await newTokenResponse.json();
+          setCSRFToken(newToken.token);
+        }
         setTimeout(() => setSubmitted(false), 5000);
+      } else {
+        const errorData = await response.json();
+        console.error('Form submission error:', errorData);
+        // Always fetch a fresh token after any submission attempt (success or failure)
+        const newTokenResponse = await fetch('/api/csrf');
+        if (newTokenResponse.ok) {
+          const newToken = await newTokenResponse.json();
+          setCSRFToken(newToken.token);
+        }
       }
     } catch (error) {
       console.error('Form submission error:', error);
@@ -250,9 +283,8 @@ export default function Contact() {
                   type="submit"
                   disabled={loading}
                   style={{ backgroundColor: '#d4af37', color: '#ffffff' }}
-                  className="w-full py-3 md:py-4 rounded-lg font-semibold hover:opacity-90 transition-opacity disabled:opacity-50 text-sm md:text-base flex items-center justify-center gap-2"
+                  className="w-full py-3 md:py-4 rounded-lg font-semibold hover:opacity-90 transition-opacity disabled:opacity-50 text-sm md:text-base"
                 >
-                  <FiSend size={18} />
                   {loading ? 'Sending...' : 'Book Consultation'}
                 </button>
               </form>
@@ -312,6 +344,78 @@ export default function Contact() {
               </div>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* Follow Our Work - Social Media Section */}
+      <section className="py-12 md:py-20 bg-white">
+        <div className="max-w-4xl mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center"
+          >
+            <h2 className="text-2xl md:text-3xl font-bold text-primary mb-2">FOLLOW OUR WORK</h2>
+            <p className="text-base md:text-lg text-foreground/70 mb-8">
+              Connect with us on social media to see our latest projects and design inspirations:
+            </p>
+
+            {/* Social Media Icons */}
+            <div className="flex gap-6 md:gap-8 justify-center flex-wrap">
+              {/* Instagram */}
+              <motion.a
+                href="https://www.instagram.com/sarvmaan_india/"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className="text-center"
+              >
+                <div className="w-16 h-16 md:w-20 md:h-20 rounded-lg bg-gradient-to-br from-pink-500 via-red-500 to-yellow-500 flex items-center justify-center shadow-lg hover:shadow-xl transition-all mx-auto mb-3">
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.266.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/>
+                  </svg>
+                </div>
+                <p className="text-primary font-bold text-sm md:text-base">Instagram</p>
+              </motion.a>
+
+              {/* Facebook */}
+              <motion.a
+                href="https://www.facebook.com/HomeSuperhero"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className="text-center"
+              >
+                <div className="w-16 h-16 md:w-20 md:h-20 rounded-lg bg-blue-600 flex items-center justify-center shadow-lg hover:shadow-xl transition-all mx-auto mb-3">
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                  </svg>
+                </div>
+                <p className="text-primary font-bold text-sm md:text-base">Facebook</p>
+              </motion.a>
+
+              {/* YouTube */}
+              <motion.a
+                href="https://www.youtube.com/@SarvMaan"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className="text-center"
+              >
+                <div className="w-16 h-16 md:w-20 md:h-20 rounded-lg bg-red-600 flex items-center justify-center shadow-lg hover:shadow-xl transition-all mx-auto mb-3">
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                  </svg>
+                </div>
+                <p className="text-primary font-bold text-sm md:text-base">YouTube</p>
+              </motion.a>
+            </div>
+          </motion.div>
         </div>
       </section>
     </div>

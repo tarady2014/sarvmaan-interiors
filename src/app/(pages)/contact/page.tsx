@@ -7,29 +7,27 @@ import { FaWhatsapp } from 'react-icons/fa';
 import HeroImage from '@/components/HeroImage';
 import { Metadata } from 'next';
 
-
 export const metadata: Metadata = {
-  title: 'Contact Sarvmaan Home Superhero | Get Free Design Consultation',
-  description: 'Contact us for a free interior design consultation. Call, email, or WhatsApp. We respond within 24 hours. Transform your home today with Sarvmaan Home Superhero.',
-  keywords: 'contact interior designer, interior design consultation, home design quote, contact Sarvmaan, interior designer near me',
+  title: 'Contact Sarvmaan | Get Your Free Interior Design Consultation',
+  description: 'Get in touch with our interior design experts for a free consultation. Call +91 74477 22255 or fill our contact form. 24/7 support for your dream home project.',
+  keywords: 'contact interior designer, free consultation, interior design inquiry, Pune design services, home renovation contact',
   openGraph: {
     type: 'website',
     url: 'https://sarvmaan.com/contact',
     title: 'Contact Sarvmaan | Free Interior Design Consultation',
-    description: 'Get a free consultation. Call, email, or WhatsApp us. Response within 24 hours.',
+    description: 'Get in touch with our interior design experts for a free consultation. 24/7 support available.',
     images: [
       {
         url: '/images/hero-contact.webp',
         width: 1200,
         height: 630,
-        alt: 'Contact Sarvmaan | Free Interior Design Consultation',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Contact Sarvmaan | Free Design Consultation',
-    description: 'Get your free interior design consultation',
+    title: 'Contact Sarvmaan | Free Interior Design Consultation',
+    description: 'Get in touch with our interior design experts. Call +91 74477 22255 or fill our contact form.',
   },
 };
 

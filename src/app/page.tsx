@@ -10,6 +10,9 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'SarvMaan Home Superhero | Premium Interior Design in Pune',
   description: 'Transform your dream home with SarvMaan Home Superhero. 6+ years experience, 500+ successful projects. Premium interior design, modular kitchens, wardrobes, and furniture solutions across Pune.',
+  alternates: {
+    canonical: 'https://sarvmaan.com',
+  },
 };
 
 export default function Home() {

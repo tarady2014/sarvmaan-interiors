@@ -211,8 +211,10 @@ export default function ProjectsGallery() {
                       src={`https://www.youtube.com/embed/${selectedProject.youtubeVideoId}?rel=0`}
                       title={selectedProject.title}
                       frameBorder="0"
-                      allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
                       allowFullScreen
+                      referrerPolicy="no-referrer"
+                      sandbox="allow-same-origin allow-scripts allow-popups allow-presentation"
                       loading="lazy"
                     />
                   </div>

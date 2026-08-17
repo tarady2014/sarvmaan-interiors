@@ -242,10 +242,12 @@ export default function Projects() {
                     <iframe
                       width="100%"
                       height="100%"
-                      src={`https://www.youtube.com/embed/${selectedProjectData.youtubeVideoId}`}
+                      src={`https://www.youtube.com/embed/${selectedProjectData.youtubeVideoId}?rel=0`}
                       title={selectedProjectData.title}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
                       allowFullScreen
+                      referrerPolicy="no-referrer"
+                      sandbox="allow-same-origin allow-scripts allow-popups allow-presentation"
                       className="rounded-xl"
                     />
                   </div>

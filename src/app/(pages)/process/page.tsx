@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { FiCheckCircle, FiArrowRight, FiPhone } from 'react-icons/fi';
 import HeroImage from '@/components/HeroImage';
+import { Metadata } from 'next';
 
 const steps = [
   { id: 1, title: 'Consultation', description: 'Understand your vision and budget.' },
@@ -13,6 +14,32 @@ const steps = [
   { id: 5, title: 'Quality Check', description: 'Rigorous inspection for perfection.' },
   { id: 6, title: 'Handover', description: 'Delivery and post-project support.' },
 ];
+
+
+export const metadata: Metadata = {
+  title: 'Our Interior Design Process | 6-Step Transparent Workflow',
+  description: 'Understand our proven 6-step design process: Consultation, Design, Planning, Execution, Quality Check, and Handover. Transparent, professional, and customer-focused.',
+  keywords: 'interior design process, design workflow, home design steps, interior design consultation, project management',
+  openGraph: {
+    type: 'website',
+    url: 'https://sarvmaan.com/process',
+    title: 'Our Design Process | Sarvmaan Home Superhero',
+    description: '6-step transparent process: Consultation → Design → Planning → Execution → QC → Handover',
+    images: [
+      {
+        url: '/images/hero-process.webp',
+        width: 1200,
+        height: 630,
+        alt: 'Our Design Process | Sarvmaan Home Superhero',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Our Design Process | Sarvmaan Home Superhero',
+    description: '6-step transparent interior design workflow',
+  },
+};
 
 export default function Process() {
   return (

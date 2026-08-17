@@ -7,8 +7,35 @@ import { useState } from 'react';
 import { projects } from '@/data/projects';
 import { FiPlay, FiX, FiMapPin, FiCalendar } from 'react-icons/fi';
 import HeroImage from '@/components/HeroImage';
+import { Metadata } from 'next';
 
 type Category = 'all' | 'kitchen' | 'wardrobe' | 'hall' | 'tvunit' | 'mandir' | 'bedroom' | 'complete-home-interior' | 'commercial';
+
+
+export const metadata: Metadata = {
+  title: 'Interior Design Portfolio | 500+ Completed Projects in Pune',
+  description: 'Browse our portfolio of 500+ successful interior design projects. Kitchens, wardrobes, bedrooms, living halls, and complete home interiors. See our award-winning work.',
+  keywords: 'interior design portfolio, completed projects, kitchen design, wardrobe interior, home design Pune, before after',
+  openGraph: {
+    type: 'website',
+    url: 'https://sarvmaan.com/projects',
+    title: 'Our Portfolio | 500+ Interior Design Projects',
+    description: 'Explore our award-winning interior design projects - kitchens, wardrobes, and complete homes.',
+    images: [
+      {
+        url: '/images/hero-portfolio.webp',
+        width: 1200,
+        height: 630,
+        alt: 'Our Portfolio | 500+ Interior Design Projects',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Our Portfolio | 500+ Interior Design Projects',
+    description: 'Award-winning interior design projects across Pune',
+  },
+};
 
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState<Category>('all');

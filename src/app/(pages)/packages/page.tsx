@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { FiCheck, FiX } from 'react-icons/fi';
 import HeroImage from '@/components/HeroImage';
+import { Metadata } from 'next';
 
 type Package = {
   name: string;
@@ -88,6 +89,32 @@ const commonFeatures = [
   { icon: '🛠️', title: 'Execution', description: 'Professional installation with supervision' },
   { icon: '✅', title: 'Warranty', description: 'Quality assurance and after-sales support' },
 ];
+
+
+export const metadata: Metadata = {
+  title: 'Interior Design Packages & Pricing | Flexible Solutions',
+  description: 'Affordable interior design packages starting from ₹2L. Essential, Premium, and Luxury packages. Flexible timeline, 3D visualization, and quality furniture included.',
+  keywords: 'interior design packages, interior design cost, affordable interior design, modular kitchen price, interior design pricing',
+  openGraph: {
+    type: 'website',
+    url: 'https://sarvmaan.com/packages',
+    title: 'Interior Design Packages & Pricing | Sarvmaan',
+    description: 'Affordable packages from ₹2L. Essential, Premium, and Luxury options with flexible timelines.',
+    images: [
+      {
+        url: '/images/hero-package.webp',
+        width: 1200,
+        height: 630,
+        alt: 'Interior Design Packages & Pricing | Sarvmaan',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Interior Design Packages | Sarvmaan Home Superhero',
+    description: 'Affordable interior design packages starting from ₹2L',
+  },
+};
 
 export default function PackagesPage() {
   const [selectedPackage, setSelectedPackage] = useState<number | null>(1);

@@ -20,6 +20,17 @@ export const metadata: Metadata = {
   description: "Transform your house into your dream home with Sarvmaan Home Superhero. Award-winning interior design, modular kitchens, wardrobes, and full home renovations. 500+ projects completed.",
   keywords: "interior design, modular kitchen, wardrobes, home renovation, Pune interiors, premium design",
   robots: "index, follow",
+  icons: {
+    icon: [
+      {
+        url: "/favicon.png",
+        type: "image/png",
+        sizes: "any",
+      },
+    ],
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
   openGraph: {
     type: "website",
     url: "https://sarvmaan.com",
@@ -57,6 +68,9 @@ export default function RootLayout({ children }: LayoutProps) {
       suppressHydrationWarning
     >
       <head>
+        <link rel="icon" type="image/png" href="/favicon.png" />
+        <link rel="shortcut icon" href="/favicon.png" />
+        <link rel="apple-touch-icon" href="/favicon.png" />
         <meta name="color-scheme" content="light only" />
         <meta name="theme-color" content="#ffffff" />
       </head>

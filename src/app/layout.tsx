@@ -68,11 +68,25 @@ export default function RootLayout({ children }: LayoutProps) {
       suppressHydrationWarning
     >
       <head>
+        {/* Favicon Links */}
         <link rel="icon" type="image/png" href="/favicon.png" />
         <link rel="shortcut icon" href="/favicon.png" />
         <link rel="apple-touch-icon" href="/favicon.png" />
         <meta name="color-scheme" content="light only" />
         <meta name="theme-color" content="#ffffff" />
+        
+        {/* Google Tag Manager (gtag.js) */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18417335374"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'AW-18417335374');
+            `,
+          }}
+        />
       </head>
       <body className="bg-white text-gray-900">
         <Header />

@@ -5,8 +5,10 @@ import { useState, useEffect } from 'react';
 import { FiPhone, FiMail, FiMapPin, FiClock } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
 import HeroImage from '@/components/HeroImage';
+import { useGoogleAdsConversion } from '@/hooks/useGoogleAdsConversion';
 
 export default function ContactClient() {
+  const { trackConversion } = useGoogleAdsConversion();
   const [csrfToken, setCSRFToken] = useState('');
   const [formData, setFormData] = useState({
     fullName: '',
@@ -56,6 +58,10 @@ export default function ContactClient() {
 
       if (response.ok) {
         setSubmitted(true);
+        
+        // Track Google Ads conversion
+        trackConversion('96_jCN2F2u8cEM74iM5E');
+        
         setFormData({ 
           fullName: '', 
           phone: '', 

@@ -75,14 +75,17 @@ export default function RootLayout({ children }: LayoutProps) {
         <meta name="color-scheme" content="light only" />
         <meta name="theme-color" content="#ffffff" />
         
-        {/* Google Tag Manager (gtag.js) */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18417335374"></script>
+        {/* Google Analytics 4 (GA4) & Google Ads (gtag.js) */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-6V2Q2XSC18"></script>
         <script
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
+              // Google Analytics 4
+              gtag('config', 'G-6V2Q2XSC18');
+              // Google Ads
               gtag('config', 'AW-18417335374');
             `,
           }}

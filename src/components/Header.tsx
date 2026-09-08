@@ -34,11 +34,12 @@ export default function Header() {
       <nav className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
         <Link href="/" className="flex items-center gap-3">
           <Image
-            src="/logo.png"
+            src="/sarvmaan-logo.png"
             alt="SarvMaan Home Superhero Logo"
             width={40}
             height={40}
-            className="w-10 h-10"
+            className="w-10 h-10 object-contain"
+            priority
           />
           <div className="flex flex-col">
             <span className="text-lg font-bold text-primary leading-tight">

@@ -1,0 +1,28 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /.*\.json$
+
+# Allow search engines to crawl specific paths
+Allow: /projects
+Allow: /services
+Allow: /contact
+Allow: /about
+Allow: /process
+Allow: /spin-to-win
+
+# Sitemap location
+Sitemap: https://sarvmaan.com/sitemap.xml
+
+# Delay for aggressive crawlers
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+# Block bad bots
+User-agent: MJ12bot
+Disallow: /

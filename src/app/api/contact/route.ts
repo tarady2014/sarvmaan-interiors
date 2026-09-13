@@ -6,6 +6,7 @@ import {
   sanitizeEmail, 
   sanitizePhone,
   sanitizeText,
+  sanitizeMessage,
   hasSuspiciousPatterns
 } from '@/lib/validation';
 import { rateLimitMiddleware, getClientIp } from '@/lib/rateLimit';
@@ -116,7 +117,7 @@ export async function POST(request: NextRequest) {
     const sanitizedEmail = sanitizeEmail(email.trim());
     const sanitizedPhone = sanitizePhone(phone.trim());
     const sanitizedCity = sanitizeHtml(sanitizeText(city.trim()));
-    const sanitizedMessage = sanitizeHtml(sanitizeText(message?.trim() || ''));
+    const sanitizedMessage = sanitizeMessage(message?.trim() || '');
 
     console.log('✅ [SECURITY] All inputs sanitized');
 
@@ -305,6 +306,22 @@ export async function POST(request: NextRequest) {
       console.error('❌ [API] Email sending error:');
       console.error('[API] Business Email Error:', JSON.stringify(businessEmailResult.error, null, 2));
       console.error('[API] User Email Error:', JSON.stringify(userEmailResult.error, null, 2));
+      
+      // Log more details for debugging
+      if (businessEmailResult.error) {
+        console.error('[API] Business Email Error Details:', {
+          message: businessEmailResult.error?.message,
+          name: businessEmailResult.error?.name,
+        });
+      }
+      if (userEmailResult.error) {
+        console.error('[API] User Email Error Details:', {
+          message: userEmailResult.error?.message,
+          name: userEmailResult.error?.name,
+          recipient: sanitizedEmail,
+        });
+      }
+      
       return NextResponse.json(
         { 
           error: 'Failed to send email. Please try again.',

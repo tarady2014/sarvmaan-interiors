@@ -135,6 +135,26 @@ export const sanitizeText = (text: string): string => {
 };
 
 /**
+ * Sanitize message/textarea input (allows newlines)
+ * Prevents XSS while preserving formatting
+ */
+export const sanitizeMessage = (text: string): string => {
+  // Sanitize HTML but preserve newlines for multi-line messages
+  let sanitized = text.trim();
+  
+  // HTML encode dangerous characters
+  const map: { [key: string]: string } = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;',
+  };
+  
+  return sanitized.replace(/[&<>"']/g, (char) => map[char] || char);
+};
+
+/**
  * Sanitize email to prevent header injection
  * Email addresses should not contain newlines or special characters
  */

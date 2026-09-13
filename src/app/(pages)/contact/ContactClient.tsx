@@ -22,8 +22,10 @@ export default function ContactClient() {
 
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [couponCode, setCouponCode] = useState('');
+  const [offer, setOffer] = useState('');
 
-  // Fetch CSRF token on component mount
+  // Fetch CSRF token and URL parameters on component mount
   useEffect(() => {
     const fetchCSRFToken = async () => {
       try {
@@ -36,6 +38,37 @@ export default function ContactClient() {
         console.error('Failed to fetch CSRF token:', error);
       }
     };
+
+    // Get URL parameters from spin-to-win
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const coupon = params.get('coupon');
+      const offerType = params.get('offer');
+      const society = params.get('society');
+      const area = params.get('area');
+
+      if (coupon) {
+        setCouponCode(coupon);
+        setOffer(offerType || '');
+        
+        // Auto-fill message field with coupon code and offer details
+        let messageText = `Coupon Code: ${coupon}`;
+        if (offerType) {
+          messageText += `\nOffer: ${offerType}`;
+        }
+        if (society) {
+          messageText += `\nSociety: ${society}`;
+          if (area) {
+            messageText += ` (${area})`;
+          }
+        }
+        
+        setFormData(prev => ({
+          ...prev,
+          message: messageText
+        }));
+      }
+    }
 
     fetchCSRFToken();
   }, []);
@@ -79,8 +112,20 @@ export default function ContactClient() {
         }
         setTimeout(() => setSubmitted(false), 5000);
       } else {
-        const errorData = await response.json();
-        console.error('Form submission error:', errorData);
+        try {
+          const errorData = await response.json();
+          console.error('Form submission error:', {
+            status: response.status,
+            statusText: response.statusText,
+            error: errorData,
+          });
+        } catch {
+          console.error('Form submission error:', {
+            status: response.status,
+            statusText: response.statusText,
+            message: 'Failed to parse error response',
+          });
+        }
         // Always fetch a fresh token after any submission attempt (success or failure)
         const newTokenResponse = await fetch('/api/csrf');
         if (newTokenResponse.ok) {
@@ -271,17 +316,33 @@ export default function ContactClient() {
 
                 {/* Message / Requirements */}
                 <div>
-                  <label className="block text-xs md:text-sm font-semibold text-foreground/70 mb-1 md:mb-2">
-                    Message / Requirements
-                  </label>
+                  <div className="flex items-center justify-between mb-1 md:mb-2">
+                    <label className="block text-xs md:text-sm font-semibold text-foreground/70">
+                      Message / Requirements
+                    </label>
+                    {couponCode && (
+                      <span className="text-xs font-bold text-green-600 bg-green-50 px-2 py-1 rounded">
+                        ✓ Spin-to-Win Code Added
+                      </span>
+                    )}
+                  </div>
                   <textarea
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
                     rows={3}
-                    className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary text-sm"
-                    placeholder="Tell us about your project, requirements, or any specific preferences"
+                    className={`w-full px-3 md:px-4 py-2 md:py-3 border rounded-lg focus:outline-none text-sm transition-colors ${
+                      couponCode
+                        ? 'border-green-300 focus:border-green-500 bg-green-50'
+                        : 'border-gray-300 focus:border-secondary'
+                    }`}
+                    placeholder={couponCode ? 'Your coupon code is pre-filled. Add any additional requirements...' : 'Tell us about your project, requirements, or any specific preferences'}
                   />
+                  {couponCode && (
+                    <p className="text-xs text-green-700 mt-2 font-medium">
+                      💡 Your spin-to-win coupon code has been automatically added above. Feel free to add more details about your project.
+                    </p>
+                  )}
                 </div>
 
                 {/* Submit Button */}

@@ -56,6 +56,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/design-consultation" className="hover:text-secondary transition flex items-center gap-2 text-xs md:text-sm">
+                  <FiArrowRight size={14} /> Consultation
+                </Link>
+              </li>
+              <li>
                 <Link href="/projects" className="hover:text-secondary transition flex items-center gap-2 text-xs md:text-sm">
                   <FiArrowRight size={14} /> Portfolio
                 </Link>

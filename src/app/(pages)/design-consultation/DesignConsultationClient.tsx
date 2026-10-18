@@ -25,7 +25,7 @@ const HeroSectionCustom = () => (
         transition={{ duration: 0.8 }}
       >
         <motion.h1
-          className="text-4xl md:text-6xl lg:text-7xl font-light text-white mb-4 md:mb-6 leading-tight"
+          className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-light text-white mb-4 md:mb-6 leading-tight"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}
@@ -34,7 +34,7 @@ const HeroSectionCustom = () => (
         </motion.h1>
 
         <motion.p
-          className="text-lg md:text-xl text-gray-100 max-w-3xl mb-8"
+          className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-100 max-w-3xl mb-8 leading-relaxed"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.6 }}
@@ -90,93 +90,51 @@ const WhyThisService = () => (
         </p>
       </motion.div>
 
-      {/* Comparison Table */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-        className="overflow-x-auto mb-16"
-      >
-        <table className="w-full border-collapse">
-          <thead>
-            <tr className="bg-gray-100">
-              <th className="border border-gray-300 p-4 text-left font-semibold">Aspect</th>
-              <th className="border border-gray-300 p-4 text-left font-semibold">Traditional Designers</th>
-              <th className="border border-gray-300 p-4 text-left font-semibold">Local Contractors</th>
-              <th className="border border-gray-300 p-4 text-left font-semibold text-amber-700 font-bold">The SarvMaan Solution</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td className="border border-gray-300 p-4 font-semibold">Pricing Model</td>
-              <td className="border border-gray-300 p-4">% Based Commission</td>
-              <td className="border border-gray-300 p-4">Hidden Costs</td>
-              <td className="border border-gray-300 p-4 bg-amber-50 text-amber-700 font-semibold">✓ Fixed, Transparent Pricing</td>
-            </tr>
-            <tr>
-              <td className="border border-gray-300 p-4 font-semibold">Design Quality</td>
-              <td className="border border-gray-300 p-4">Professional but Slow</td>
-              <td className="border border-gray-300 p-4">Plan as They Go</td>
-              <td className="border border-gray-300 p-4 bg-amber-50 text-amber-700 font-semibold">✓ Complete 3D & 2D Blueprints</td>
-            </tr>
-            <tr>
-              <td className="border border-gray-300 p-4 font-semibold">Team Structure</td>
-              <td className="border border-gray-300 p-4">One-Man Dependency</td>
-              <td className="border border-gray-300 p-4">No Design Expertise</td>
-              <td className="border border-gray-300 p-4 bg-amber-50 text-amber-700 font-semibold">✓ Dedicated Project Manager + Designer Team</td>
-            </tr>
-            <tr>
-              <td className="border border-gray-300 p-4 font-semibold">Execution Support</td>
-              <td className="border border-gray-300 p-4">Limited Monitoring</td>
-              <td className="border border-gray-300 p-4">No Quality Audits</td>
-              <td className="border border-gray-300 p-4 bg-amber-50 text-amber-700 font-semibold">✓ Scheduled Quality Checks</td>
-            </tr>
-            <tr>
-              <td className="border border-gray-300 p-4 font-semibold">Contractor Network</td>
-              <td className="border border-gray-300 p-4">May Lack Coordination</td>
-              <td className="border border-gray-300 p-4">N/A</td>
-              <td className="border border-gray-300 p-4 bg-amber-50 text-amber-700 font-semibold">✓ Verified & Trusted Network</td>
-            </tr>
-          </tbody>
-        </table>
-      </motion.div>
-
-      {/* Key Advantages */}
-      <div className="grid md:grid-cols-4 gap-8">
+      {/* Comparison Cards */}
+      <div className="grid md:grid-cols-3 gap-6 md:gap-8 mb-16">
         {[
           {
-            icon: '🎯',
-            title: 'Zero Obligation',
-            description: 'Bring your own contractors or use ours. 100% flexibility in every decision.',
+            title: 'Traditional Interior Designers',
+            points: ['% Based Commission', 'Expensive Fees', 'Time-consuming delays', 'One man dependency'],
+            highlight: false,
           },
           {
-            icon: '💰',
-            title: 'Massive ROI',
-            description: 'Fixed fee prevents costly rework, material wastage, and contractor disputes.',
+            title: 'Local Contractors',
+            points: ['Lack design knowledge', 'Plan as they go', 'Material wastage', 'No quality assurance'],
+            highlight: false,
           },
           {
-            icon: '�',
-            title: 'Total Transparency',
-            description: 'Know exactly what you pay and exactly what value you receive.',
+            title: 'The SarvMaan Solution',
+            points: ['✓ Fixed, transparent pricing', '✓ Complete 3D & 2D Blueprints', '✓ Project Manager + Team', '✓ Scheduled Quality Checks'],
+            highlight: true,
           },
-          {
-            icon: '👥',
-            title: 'Expert Team',
-            description: 'Senior architects & designers, not a single designer.',
-          },
-        ].map((item, index) => (
+        ].map((section, index) => (
           <motion.div
             key={index}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
             viewport={{ once: true }}
-            className="p-8 bg-gradient-to-br from-amber-50 to-white border border-amber-200 rounded-lg hover:shadow-lg transition-shadow"
+            className={`p-6 md:p-8 rounded-xl border-2 ${
+              section.highlight
+                ? 'border-[#d4af37] bg-gradient-to-br from-amber-50 to-white'
+                : 'border-gray-200 bg-white'
+            }`}
           >
-            <div className="text-5xl mb-4">{item.icon}</div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">{item.title}</h3>
-            <p className="text-gray-600 text-sm leading-relaxed">{item.description}</p>
+            <h3 className={`text-xl md:text-2xl font-bold mb-6 ${
+              section.highlight ? 'text-[#d4af37]' : 'text-gray-900'
+            }`}>
+              {section.title}
+            </h3>
+            <ul className="space-y-3">
+              {section.points.map((point, i) => (
+                <li key={i} className={`text-sm md:text-base leading-relaxed ${
+                  section.highlight ? 'text-gray-800 font-semibold' : 'text-gray-600'
+                }`}>
+                  {point}
+                </li>
+              ))}
+            </ul>
           </motion.div>
         ))}
       </div>
@@ -298,79 +256,96 @@ const PackagesSection = () => {
           </p>
         </motion.div>
 
-        {/* Pricing Table */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="overflow-x-auto mb-12"
-        >
-          <table className="w-full">
-            <thead>
-              <tr className="bg-gray-100 border-b-2 border-gray-300">
-                <th className="p-4 text-left font-semibold text-gray-900">Package</th>
-                <th className="p-4 text-left font-semibold text-gray-900">Price (INR)</th>
-                <th className="p-4 text-left font-semibold text-gray-900">Included Visits</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="border-b border-gray-200 hover:bg-amber-50">
-                <td className="p-4 font-semibold text-gray-900">1 BHK Design & Consultancy</td>
-                <td className="p-4 text-2xl font-bold text-amber-700">₹25,000</td>
-                <td className="p-4 text-gray-600">4 scheduled on-site visits</td>
-              </tr>
-              <tr className="border-b border-gray-200 hover:bg-amber-50 bg-amber-100/50">
-                <td className="p-4 font-semibold text-gray-900">2 BHK Design & Consultancy</td>
-                <td className="p-4 text-2xl font-bold text-amber-700">₹50,000</td>
-                <td className="p-4 text-gray-600">6 scheduled on-site visits</td>
-              </tr>
-              <tr className="border-b border-gray-200 hover:bg-amber-50">
-                <td className="p-4 font-semibold text-gray-900">3 BHK Design & Consultancy</td>
-                <td className="p-4 text-2xl font-bold text-amber-700">₹75,000</td>
-                <td className="p-4 text-gray-600">7 scheduled on-site visits</td>
-              </tr>
-            </tbody>
-          </table>
-        </motion.div>
-
-        {/* Package Note */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="bg-white border-2 border-amber-200 rounded-xl p-8 max-w-4xl mx-auto"
-        >
-          <div className="text-gray-700 text-center text-lg leading-relaxed">
-            <p className="font-semibold text-gray-900 mb-4">Committed to ensuring low costs for you with no % fees.</p>
-            <p className="mb-6">Each package includes:</p>
-            <div className="mt-4 grid md:grid-cols-2 gap-4 text-left mb-6">
-              <div>✓ Complete 3D & 2D Blueprints</div>
-              <div>✓ Precise Material Estimates</div>
-              <div>✓ Project Manager + Designer Team</div>
-              <div>✓ Scheduled On-Site Quality Checks</div>
-            </div>
-            <p className="mt-6 text-amber-700 font-semibold">
-              Ready for ANY contractor to execute flawlessly.
-            </p>
-          </div>
-        </motion.div>
-
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mt-12"
-        >
-          <Link href="/contact">
-            <button className="px-10 py-4 bg-amber-700 text-white rounded-lg font-semibold hover:bg-amber-800 transition-all text-lg">
-              Book Your Consultation Today
-            </button>
-          </Link>
-        </motion.div>
+        {/* Pricing Cards */}
+        <div className="grid md:grid-cols-3 gap-6 md:gap-8 mb-12">
+          {[
+            {
+              title: '1 BHK Design & Consultancy',
+              price: '₹25,000',
+              visits: '4 scheduled on-site visits',
+              highlight: false,
+            },
+            {
+              title: '2 BHK Design & Consultancy',
+              price: '₹50,000',
+              visits: '6 scheduled on-site visits',
+              highlight: true,
+            },
+            {
+              title: '3 BHK Design & Consultancy',
+              price: '₹75,000',
+              visits: '7 scheduled on-site visits',
+              highlight: false,
+            },
+          ].map((pkg, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className={`p-6 md:p-8 rounded-xl border-2 transition-all ${
+                pkg.highlight
+                  ? 'border-[#d4af37] bg-gradient-to-br from-amber-50 to-white shadow-lg md:scale-105'
+                  : 'border-gray-200 bg-white hover:border-[#d4af37] hover:shadow-lg'
+              }`}
+            >
+              {pkg.highlight && (
+                <div className="inline-block bg-[#d4af37] text-[#1a1410] px-4 py-1 rounded-full text-sm font-bold mb-4">
+                  Most Popular
+                </div>
+              )}
+              <h3 className={`text-xl md:text-2xl font-bold mb-4 ${
+                pkg.highlight ? 'text-gray-900' : 'text-gray-900'
+              }`}>
+                {pkg.title}
+              </h3>
+              <div className="mb-4">
+                <p className={`text-4xl font-bold ${
+                  pkg.highlight ? 'text-[#d4af37]' : 'text-[#d4af37]'
+                }`}>
+                  {pkg.price}
+                </p>
+              </div>
+              <div className="mb-6 pb-6 border-b border-gray-200">
+                <p className="text-gray-600 font-medium text-sm md:text-base">{pkg.visits}</p>
+              </div>
+              
+              {/* Package Includes */}
+              <div className="mb-6">
+                <ul className="space-y-2 text-xs md:text-sm">
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#d4af37] flex-shrink-0">✓</span>
+                    <span className="text-gray-600">Complete 3D & 2D Blueprints</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#d4af37] flex-shrink-0">✓</span>
+                    <span className="text-gray-600">Precise Material Estimates</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#d4af37] flex-shrink-0">✓</span>
+                    <span className="text-gray-600">Project Manager + Designer Team</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#d4af37] flex-shrink-0">✓</span>
+                    <span className="text-gray-600">Scheduled Quality Checks</span>
+                  </li>
+                </ul>
+              </div>
+              
+              <button
+                onClick={() => window.location.href = '/contact'}
+                className={`w-full py-3 px-4 rounded-lg font-bold transition-all text-center ${
+                  pkg.highlight
+                    ? 'bg-[#d4af37] text-[#1a1410] hover:bg-[#e8c547]'
+                    : 'bg-gray-100 text-gray-900 hover:bg-[#d4af37] hover:text-[#1a1410]'
+                }`}
+              >
+                Get Started
+              </button>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -517,16 +492,16 @@ const TurnkeyConversion = () => (
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
-        className="bg-gradient-to-r from-amber-700 via-amber-800 to-amber-900 rounded-2xl p-12 md:p-16 text-white text-center"
+        className="bg-gradient-to-r from-[#1a1410] via-[#2d2420] to-[#1a1410] rounded-2xl p-8 md:p-12 lg:p-16 text-white text-center"
       >
-        <h2 className="text-4xl md:text-5xl font-light mb-6">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-light mb-4 md:mb-6">
           Want Us To Execute Too?
         </h2>
-        <p className="text-lg text-amber-100 max-w-3xl mx-auto mb-8 leading-relaxed">
-          If you decide to work with SarvMaan for complete interior execution after the design consultation, your design fees can be adjusted towards your turnkey project cost.
+        <p className="text-base md:text-lg text-gray-200 max-w-3xl mx-auto mb-8 leading-relaxed">
+          If you decide to work with SarvMaan for complete interior execution after the design consultation, your design fees can be adjusted towards your turnkey project.
         </p>
-        <Link href="/packages">
-          <button className="bg-amber-300 text-amber-900 px-10 py-4 rounded-lg font-semibold hover:bg-amber-200 transition-all text-lg">
+        <Link href="/packages" className="inline-block">
+          <button className="bg-[#d4af37] text-[#1a1410] px-8 md:px-10 py-3 md:py-4 rounded-lg font-bold hover:bg-[#e8c547] transition-all text-base md:text-lg">
             Explore Turnkey Interiors
           </button>
         </Link>
@@ -534,75 +509,6 @@ const TurnkeyConversion = () => (
     </div>
   </section>
 );
-
-const TestimonialSection = () => {
-  const testimonials = [
-    {
-      name: 'Priya Sharma',
-      area: 'Wakad, Pune',
-      text: 'The design consultation was exactly what I needed. I got professional guidance without overwhelming myself with a full turnkey project.',
-      rating: 5,
-    },
-    {
-      name: 'Rajesh Patel',
-      area: 'Hinjewadi, Pune',
-      text: 'The 3D visualizations helped me visualize the space perfectly. The material recommendations saved me thousands!',
-      rating: 5,
-    },
-    {
-      name: 'Anjali Desai',
-      area: 'Baner, Pune',
-      text: 'Professional, responsive, and flexible. They understood my vision and delivered exactly what I needed.',
-      rating: 5,
-    },
-  ];
-
-  return (
-    <section className="py-20 px-4 sm:px-8 bg-white">
-      <div className="max-w-6xl mx-auto">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-4">
-            What Our Clients Say
-          </h2>
-        </motion.div>
-
-        {/* Testimonials Grid */}
-        <div className="grid md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="p-8 bg-gradient-to-br from-amber-50 to-white border border-amber-100 rounded-lg"
-            >
-              <div className="flex gap-1 mb-4">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <span key={i} className="text-amber-700">
-                    ★
-                  </span>
-                ))}
-              </div>
-              <p className="text-gray-700 mb-6 leading-relaxed italic">"{testimonial.text}"</p>
-              <div>
-                <p className="font-semibold text-gray-900">{testimonial.name}</p>
-                <p className="text-sm text-gray-600">{testimonial.area}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
 
 const FAQSection = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -664,10 +570,10 @@ const FAQSection = () => {
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full p-6 flex justify-between items-center hover:bg-amber-50 transition-colors"
+                className="w-full p-4 md:p-6 flex justify-between items-center hover:bg-gray-50 transition-colors"
               >
-                <span className="text-lg font-semibold text-gray-900 text-left">{faq.question}</span>
-                <span className="text-2xl text-amber-700">
+                <span className="text-base md:text-lg font-semibold text-gray-900 text-left">{faq.question}</span>
+                <span className="text-2xl text-[#d4af37] flex-shrink-0 ml-4">
                   {openIndex === index ? '−' : '+'}
                 </span>
               </button>
@@ -678,7 +584,7 @@ const FAQSection = () => {
                   animate={{ opacity: 1, height: 'auto' }}
                   exit={{ opacity: 0, height: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="px-6 pb-6 text-gray-600 border-t border-amber-100"
+                  className="px-4 md:px-6 pb-4 md:pb-6 text-gray-600 text-sm md:text-base border-t border-gray-200"
                 >
                   {faq.answer}
                 </motion.div>
@@ -690,47 +596,6 @@ const FAQSection = () => {
     </section>
   );
 };
-
-const FinalCTA = () => (
-  <section className="py-20 px-4 sm:px-8 bg-white">
-    <div className="max-w-4xl mx-auto text-center">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-        className="mb-12"
-      >
-        <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-6">
-          Stop Overspending on Renovations
-        </h2>
-        <p className="text-lg text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-          Most Indian homeowners overspend by 30-40% on renovations due to poor planning and rushed decisions. Get a comprehensive, contractor-ready design plan with precise budget estimates and expert guidance—all at a transparent, fixed price. Save money. Avoid mistakes. Execute with confidence.
-        </p>
-
-        {/* Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link href="/contact">
-            <button className="px-10 py-4 bg-amber-700 text-white rounded-lg font-semibold hover:bg-amber-800 transition-all text-lg">
-              Book Free Consultation Call
-            </button>
-          </Link>
-          <button 
-            onClick={() => {
-              const element = document.getElementById('packages');
-              if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
-              }
-            }}
-            className="px-10 py-4 border-2 border-amber-700 text-amber-700 rounded-lg font-semibold hover:bg-amber-50 transition-all text-lg"
-          >
-            View All Packages
-          </button>
-        </div>
-      </motion.div>
-    </div>
-  </section>
-);
 
 export default function DesignConsultationClient() {
   return (
@@ -745,9 +610,7 @@ export default function DesignConsultationClient() {
       <WhatYouReceive />
       <SarvMaanAdvantage />
       <TurnkeyConversion />
-      <TestimonialSection />
       <FAQSection />
-      <FinalCTA />
     </main>
   );
 }

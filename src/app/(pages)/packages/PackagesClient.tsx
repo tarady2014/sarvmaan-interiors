@@ -120,10 +120,10 @@ export default function PackagesPage() {
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <HeroImage
-        title="Interior Design Packages"
-        subtitle="Choose the perfect package tailored to your budget and needs"
+        title="Complete Turnkey Interior Solutions"
+        subtitle="Design • Materials • Execution • Supervision - Everything You Need for Your Perfect Home"
         imageUrl="/images/hero-package.webp"
-        imageAlt="Interior Design Packages"
+        imageAlt="Complete Turnkey Interior Solutions"
       />
 
       {/* Packages Section */}
@@ -140,12 +140,21 @@ export default function PackagesPage() {
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4">
               Flexible Packages for <span className="text-secondary">Every Budget</span>
             </h2>
-            <p className="text-gray-600 text-base md:text-lg max-w-3xl mx-auto mb-2">
-              Starting estimates shown. Actual cost depends on space size, materials, complexity, and your specific requirements.
+            <p className="text-gray-600 text-base md:text-lg max-w-3xl mx-auto mb-4">
+              All our packages include <span className="font-semibold text-primary">design, premium materials, professional installation, and complete supervision</span>. Starting estimates shown. Actual cost depends on space size, materials, complexity, and your specific requirements.
             </p>
-            <p className="text-secondary font-semibold text-sm md:text-base">
-              💡 All packages are customizable - connect with us for a personalized quote
-            </p>
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 max-w-3xl mx-auto">
+              <p className="text-sm md:text-base text-gray-700 mb-2">
+                ✨ <span className="font-semibold">Want design consultation first?</span> Check our{' '}
+                <Link
+                  href="/design-consultation"
+                  className="text-secondary font-bold hover:text-[#e8c547] transition-colors"
+                >
+                  Design Consultation Package
+                </Link>
+                {' '}to get professional design advice before committing to full execution.
+              </p>
+            </div>
           </motion.div>
 
           {/* Pricing Cards */}
@@ -172,6 +181,11 @@ export default function PackagesPage() {
                     MOST POPULAR
                   </div>
                 )}
+
+                {/* Full Turnkey Service Badge */}
+                <div className="absolute top-0 left-0 bg-blue-600 text-white px-3 py-1.5 font-bold text-xs rounded-br-lg z-10">
+                  🏗️ FULL TURNKEY
+                </div>
 
                 <div className={`p-6 md:p-8 h-full flex flex-col bg-white`}>
                   {/* Package Header */}
@@ -241,9 +255,12 @@ export default function PackagesPage() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-2xl md:text-3xl font-bold text-center text-primary mb-8 md:mb-12">
-              What's Included in <span className="text-secondary">Every Package</span>
+            <h3 className="text-2xl md:text-3xl font-bold text-center text-primary mb-2">
+              Complete End-to-End <span className="text-secondary">Turnkey Execution</span>
             </h3>
+            <p className="text-center text-gray-600 mb-8 md:mb-12">
+              From consultation to handover, we handle every step of your interior transformation
+            </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {commonFeatures.map((feature, index) => (
                 <motion.div

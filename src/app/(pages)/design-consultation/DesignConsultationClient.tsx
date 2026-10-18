@@ -8,7 +8,7 @@ import { useState } from 'react';
 // Hero Section Component
 const HeroSectionCustom = () => (
   <section className="relative w-full pt-16">
-    <div className="relative w-full h-96 md:h-[600px] overflow-hidden bg-black">
+    <div className="relative w-full h-screen sm:h-96 md:h-[600px] overflow-hidden bg-black">
       <Image
         src="/images/hero-home.webp"
         alt="Professional Interior Design Consultation"
@@ -19,13 +19,13 @@ const HeroSectionCustom = () => (
       <div className="absolute inset-0 bg-black/40"></div>
 
       <motion.div
-        className="absolute inset-0 flex flex-col justify-center items-start px-4 md:px-8 max-w-7xl mx-auto w-full"
+        className="absolute inset-0 flex flex-col justify-center items-start px-4 sm:px-8 md:px-8 max-w-7xl mx-auto w-full py-8 sm:py-0"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
         <motion.h1
-          className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-light text-white mb-4 md:mb-6 leading-tight"
+          className="text-2xl sm:text-3xl md:text-6xl lg:text-7xl font-light text-white mb-3 sm:mb-4 md:mb-6 leading-tight"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}
@@ -33,8 +33,18 @@ const HeroSectionCustom = () => (
           Professional Design & Consultancy
         </motion.h1>
 
+        {/* Festive Offer Badge */}
+        <motion.div
+          className="inline-block bg-red-500 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm md:text-base font-bold mb-4 sm:mb-6 whitespace-nowrap"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.6 }}
+        >
+          🎉 20% OFF - Till 31st Dec 🎉
+        </motion.div>
+
         <motion.p
-          className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-100 max-w-3xl mb-8 leading-relaxed"
+          className="text-xs sm:text-sm md:text-lg lg:text-xl text-gray-100 max-w-2xl sm:max-w-3xl mb-6 sm:mb-8 leading-relaxed"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.6 }}
@@ -43,13 +53,13 @@ const HeroSectionCustom = () => (
         </motion.p>
 
         <motion.div
-          className="flex flex-col sm:flex-row gap-4"
+          className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.6 }}
         >
-          <Link href="/contact">
-            <button className="px-8 py-3 bg-amber-700 text-white rounded-lg font-semibold hover:bg-amber-800 transition-all">
+          <Link href="/contact" className="w-full sm:w-auto">
+            <button className="w-full px-6 sm:px-8 py-2.5 sm:py-3 bg-amber-700 text-white rounded-lg font-semibold hover:bg-amber-800 transition-all text-sm sm:text-base">
               Book Free Consultation
             </button>
           </Link>
@@ -60,7 +70,7 @@ const HeroSectionCustom = () => (
                 element.scrollIntoView({ behavior: 'smooth' });
               }
             }}
-            className="px-8 py-3 border-2 border-white text-white rounded-lg font-semibold hover:bg-white/10 transition-all"
+            className="w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 border-2 border-white text-white rounded-lg font-semibold hover:bg-white/10 transition-all text-sm sm:text-base"
           >
             View Packages
           </button>
@@ -251,9 +261,13 @@ const PackagesSection = () => {
           <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-4">
             Fixed-Fee Packages
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-4">
             Our pricing model is strictly flat-fee. No percentage-based commissions, no hidden charges. This transparency is our core selling point.
           </p>
+          <div className="inline-block bg-red-100 border-2 border-red-500 px-6 py-3 rounded-lg mt-4">
+            <p className="text-red-700 font-bold text-lg">🎉 Festive Season Offer: 20% OFF 🎉</p>
+            <p className="text-red-600 text-sm">Valid till 31st December 2026</p>
+          </div>
         </motion.div>
 
         {/* Pricing Cards */}
@@ -262,18 +276,21 @@ const PackagesSection = () => {
             {
               title: '1 BHK Design & Consultancy',
               price: '₹25,000',
+              discountedPrice: '₹20,000',
               visits: '4 scheduled on-site visits',
               highlight: false,
             },
             {
               title: '2 BHK Design & Consultancy',
               price: '₹50,000',
+              discountedPrice: '₹40,000',
               visits: '6 scheduled on-site visits',
               highlight: true,
             },
             {
               title: '3 BHK Design & Consultancy',
               price: '₹75,000',
+              discountedPrice: '₹60,000',
               visits: '7 scheduled on-site visits',
               highlight: false,
             },
@@ -284,7 +301,7 @@ const PackagesSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className={`p-6 md:p-8 rounded-xl border-2 transition-all ${
+              className={`p-6 md:p-8 rounded-xl border-2 transition-all relative ${
                 pkg.highlight
                   ? 'border-[#d4af37] bg-gradient-to-br from-amber-50 to-white shadow-lg md:scale-105'
                   : 'border-gray-200 bg-white hover:border-[#d4af37] hover:shadow-lg'
@@ -295,18 +312,31 @@ const PackagesSection = () => {
                   Most Popular
                 </div>
               )}
+              {/* Festive Discount Badge */}
+              <div className="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                20% OFF
+              </div>
+              
               <h3 className={`text-xl md:text-2xl font-bold mb-4 ${
                 pkg.highlight ? 'text-gray-900' : 'text-gray-900'
               }`}>
                 {pkg.title}
               </h3>
+              
+              {/* Original Price (Strikethrough) */}
+              <div className="mb-2">
+                <p className="text-sm text-gray-500 line-through">Original: {pkg.price}</p>
+              </div>
+              
+              {/* Discounted Price */}
               <div className="mb-4">
                 <p className={`text-4xl font-bold ${
                   pkg.highlight ? 'text-[#d4af37]' : 'text-[#d4af37]'
                 }`}>
-                  {pkg.price}
+                  {pkg.discountedPrice}
                 </p>
               </div>
+              
               <div className="mb-6 pb-6 border-b border-gray-200">
                 <p className="text-gray-600 font-medium text-sm md:text-base">{pkg.visits}</p>
               </div>
@@ -341,7 +371,7 @@ const PackagesSection = () => {
                     : 'bg-gray-100 text-gray-900 hover:bg-[#d4af37] hover:text-[#1a1410]'
                 }`}
               >
-                Get Started
+                Grab This Offer
               </button>
             </motion.div>
           ))}

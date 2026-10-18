@@ -342,19 +342,19 @@ const PackagesSection = () => {
           viewport={{ once: true }}
           className="bg-white border-2 border-amber-200 rounded-xl p-8 max-w-4xl mx-auto"
         >
-          <p className="text-gray-700 text-center text-lg leading-relaxed">
-            <span className="font-semibold text-gray-900">Committed to ensuring low costs for you with no % fees.</span><br/><br/>
-            Each package includes:
-            <div className="mt-4 grid md:grid-cols-2 gap-4 text-left">
+          <div className="text-gray-700 text-center text-lg leading-relaxed">
+            <p className="font-semibold text-gray-900 mb-4">Committed to ensuring low costs for you with no % fees.</p>
+            <p className="mb-6">Each package includes:</p>
+            <div className="mt-4 grid md:grid-cols-2 gap-4 text-left mb-6">
               <div>✓ Complete 3D & 2D Blueprints</div>
               <div>✓ Precise Material Estimates</div>
               <div>✓ Project Manager + Designer Team</div>
               <div>✓ Scheduled On-Site Quality Checks</div>
             </div>
-            <div className="mt-6 text-amber-700 font-semibold">
+            <p className="mt-6 text-amber-700 font-semibold">
               Ready for ANY contractor to execute flawlessly.
-            </div>
-          </p>
+            </p>
+          </div>
         </motion.div>
 
         {/* CTA */}
